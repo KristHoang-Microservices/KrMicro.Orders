@@ -6,7 +6,7 @@ namespace KrMicro.Core.Services;
 public interface IBaseService<TBaseEntity> where TBaseEntity : class, new()
 {
     Task<TBaseEntity> InsertAsync(TBaseEntity entity);
-    Task<TBaseEntity> AttackAsync(TBaseEntity entity);
+    Task<TBaseEntity> AttachAsync(TBaseEntity entity);
     Task<IEnumerable<TBaseEntity>> GetAllAsync();
 
     Task<TBaseEntity?> GetDetailAsync(Expression<Func<TBaseEntity, bool>> predicate);
@@ -43,7 +43,7 @@ public class BaseRepositoryService<TEntity, TDbContext> : IBaseService<TEntity>
         }
     }
 
-    public async Task<TEntity> AttackAsync(TEntity entity)
+    public async Task<TEntity> AttachAsync(TEntity entity)
     {
         if (entity == null) throw new ArgumentNullException($"{nameof(UpdateAsync)} entity must not be null");
 

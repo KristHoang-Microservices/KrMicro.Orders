@@ -1,10 +1,10 @@
 ﻿using KrMicro.Core.CQS.Command.Abstraction;
 
-namespace KrMicro.Orders.CQS.Commands.Payment;
+namespace KrMicro.Orders.CQS.Commands.Order;
 
-public record OrderDetailRequest(short ProductId, short Quantity, string SizeCode);
+public record OrderDetailRequest(short ProductId, short Amount, string SizeCode);
 
-public record CreateOrderCommandRequest( short DeliveryInformationId, List<OrderDetailRequest> OrderDetails);
+public record CreateOrderCommandRequest( short DeliveryInformationId, List<OrderDetailRequest> OrderDetails, string? Note);
 
 public class CreateOrderCommandResult : CreateCommandResult<Models.Order>
 {

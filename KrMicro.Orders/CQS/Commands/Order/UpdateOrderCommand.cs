@@ -1,8 +1,8 @@
 ﻿using KrMicro.Core.CQS.Command.Abstraction;
 
-namespace KrMicro.Orders.CQS.Commands.Payment;
+namespace KrMicro.Orders.CQS.Commands.Order;
 
-public record UpdateOrderCommandRequest( short? DeliveryInformationId);
+public record UpdateOrderCommandRequest( short? DeliveryInformationId, List<OrderDetailRequest> OrderDetails, string? Note);
 
 public class UpdateOrderCommandResult : UpdateCommandResult<Models.Order>
 {

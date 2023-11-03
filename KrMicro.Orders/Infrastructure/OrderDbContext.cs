@@ -30,7 +30,7 @@ public class OrderDbContext : DbContext
             .HasForeignKey("OrderId").IsRequired();
 
         modelBuilder.Entity<Order>().Navigation(o => o.OrderDetails).AutoInclude();
-        modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.OrderId, od.ProductId });
+        modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.OrderId, od.ProductId, od.SizeId });
 
 
         modelBuilder.Entity<Order>().HasOne<DeliveryInformation>(o => o.DeliveryInformation).WithMany(d => d.Orders)

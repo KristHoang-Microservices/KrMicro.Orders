@@ -35,7 +35,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\perfume\KrMicro.Core\KrMicro.Core.csproj" />
       <ProjectReference Include="..\KrMicro.Core\KrMicro.Core.csproj" />
     </ItemGroup>
 

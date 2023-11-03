@@ -3,6 +3,7 @@ using System;
 using KrMicro.Orders.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KrMicro.Orders.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    partial class OrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231103043037_add size")]
+    partial class addsize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,10 +84,6 @@ namespace KrMicro.Orders.Migrations
                     b.Property<short>("DeliveryInformationId")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("Note")
-                        .HasColumnType("text")
-                        .HasColumnName("Note");
-
                     b.Property<DateTimeOffset?>("OrderDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("OrderDate");
@@ -127,10 +125,6 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("SizeId");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("integer")
-                        .HasColumnName("Amount");
-
                     b.Property<DateTimeOffset?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreatedAt");
@@ -142,6 +136,10 @@ namespace KrMicro.Orders.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("Price");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("Quantity");
 
                     b.Property<string>("SizeCode")
                         .IsRequired()

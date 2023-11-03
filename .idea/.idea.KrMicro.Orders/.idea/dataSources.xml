@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="KrMicro.Orders@ep-dry-flower-08762324.ap-southeast-1.aws.neon.tech" uuid="75cc456b-8c32-4586-a6c6-aa98286fabd0">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ep-dry-flower-08762324.ap-southeast-1.aws.neon.tech:5432/KrMicro.Orders?password=BWmOlJchM2C0&amp;user=khanhworktime</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
