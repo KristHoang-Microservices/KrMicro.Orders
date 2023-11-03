@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KrMicro.Orders", "KrMicro.Orders\KrMicro.Orders.csproj", "{C9B60A1A-62FE-4753-A71A-3D2A54925D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrMicro.Core", "KrMicro.Core\KrMicro.Core.csproj", "{2D403D6E-CC65-48C3-A31A-DE07F2413E0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9B60A1A-62FE-4753-A71A-3D2A54925D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B60A1A-62FE-4753-A71A-3D2A54925D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B60A1A-62FE-4753-A71A-3D2A54925D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B60A1A-62FE-4753-A71A-3D2A54925D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D403D6E-CC65-48C3-A31A-DE07F2413E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D403D6E-CC65-48C3-A31A-DE07F2413E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D403D6E-CC65-48C3-A31A-DE07F2413E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D403D6E-CC65-48C3-A31A-DE07F2413E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
