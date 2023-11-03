@@ -46,11 +46,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DbSQL");
-builder.Services.AddDbContext<TransactionDbContext>(opt => opt.UseSqlServer(connectionString),
+builder.Services.AddDbContext<OrderDbContext>(opt => opt.UseNpgsql(connectionString),
     ServiceLifetime.Transient);
 
 builder.Services.AddScoped<IPaymentService, PaymentRepositoryService>();
 builder.Services.AddScoped<ITransactionService, TransactionRepositoryService>();
+builder.Services.AddScoped<IDeliveryInformationService, DeliveryInformationRepositoryService>();
+builder.Services.AddScoped<IOrderService, OrderRepositoryService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailRepositoryService>();
 
 builder.Services.AddCors(options =>
 {
@@ -91,6 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

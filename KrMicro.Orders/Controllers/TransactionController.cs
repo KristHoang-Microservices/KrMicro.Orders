@@ -29,7 +29,7 @@ public class TransactionController : ControllerBase
 
     // GET: api/Transaction/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetTransactionByIdQueryResult>> GetPayment(short id)
+    public async Task<ActionResult<GetTransactionByIdQueryResult>> GetTransaction(short id)
     {
         var item = await _transactionService.GetDetailAsync(item => item.Id == id);
 
@@ -83,7 +83,7 @@ public class TransactionController : ControllerBase
         var item = await _transactionService.GetDetailAsync(x => x.Id == id);
         if (item.Id == null) return BadRequest();
         item.Status = request.Status;
-        item.UpdatedAt = DateTimeOffset.UtcNow;
+        item.CreatedAt = DateTimeOffset.UtcNow;
         await _transactionService.UpdateAsync(item);
 
         return new UpdateTransactionStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);

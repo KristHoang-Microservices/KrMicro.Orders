@@ -74,7 +74,7 @@ public class PaymentController : ControllerBase
         var item = await _paymentService.GetDetailAsync(x => x.Id == id);
         if (item.Id == null) return BadRequest();
         item.Status = request.Status;
-        item.UpdatedAt = DateTimeOffset.UtcNow;
+        item.CreatedAt = DateTimeOffset.UtcNow;
         await _paymentService.UpdateAsync(item);
 
         return new UpdatePaymentStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);

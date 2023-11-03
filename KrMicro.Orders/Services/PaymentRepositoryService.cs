@@ -8,9 +8,9 @@ public interface IPaymentService : IBaseService<Payment>
 {
 }
 
-public class PaymentRepositoryService : BaseRepositoryService<Payment, TransactionDbContext>, IPaymentService
+public class PaymentRepositoryService : BaseRepositoryService<Payment, OrderDbContext>, IPaymentService
 {
-    public PaymentRepositoryService(TransactionDbContext dataContext) : base(dataContext)
+    public PaymentRepositoryService(OrderDbContext dataContext) : base(dataContext)
     {
     }
 }

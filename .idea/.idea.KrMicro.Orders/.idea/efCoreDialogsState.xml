@@ -4,7 +4,7 @@
     <option name="keyValueStorage">
       <map>
         <entry key="Common:buildConfiguration" value="Debug" />
-        <entry key="Common:c9b60a1a-62fe-4753-a71a-3d2a54925d98:dbContext" value="KrMicro.Orders.Infrastructure.TransactionDbContext" />
+        <entry key="Common:c9b60a1a-62fe-4753-a71a-3d2a54925d98:dbContext" value="KrMicro.Orders.Infrastructure.OrderDbContext" />
         <entry key="Common:noBuild" value="false" />
         <entry key="Common:outputFolder" value="Migrations" />
         <entry key="Common:useDefaultConnection" value="true" />

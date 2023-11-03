@@ -8,49 +8,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a4ae814-d5f6-4331-ab4d-1616cbac24b7" name="Changes" comment="Init repo">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/efCoreCommonOptions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/efCoreDialogsState.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/efCoreCommonOptions.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/efCoreDialogsState.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction.sln" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Payment/CreatePaymentCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/CreatePaymentCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Payment/UpdatePaymentCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/UpdatePaymentCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Payment/UpdatePaymentStatusCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/UpdatePaymentStatusCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Transaction/CreateTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Transaction/CreateTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Transaction/UpdateTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Transaction/UpdateTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Commands/Transaction/UpdateTransactionStatusCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Transaction/UpdateTransactionStatusCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Queries/Payment/GetAllPaymentQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Payment/GetAllPaymentQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Queries/Payment/GetPaymentByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Payment/GetPaymentByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Queries/Transaction/GetAllTransactionQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Transaction/GetAllTransactionQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/CQS/Queries/Transaction/GetTransactionByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Transaction/GetTransactionByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Constants/NetworkFailedResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Constants/NetworkFailedResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Constants/NetworkSuccessResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Constants/NetworkSuccessResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Controllers/PaymentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/PaymentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Controllers/TransactionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/TransactionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Infrastructure/TransactionDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Infrastructure/TransactionDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/KrMicro.Transaction.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/KrMicro.Orders.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Migrations/20231002163258_Initial.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231002163258_Initial.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Migrations/20231002163258_Initial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231002163258_Initial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Migrations/TransactionDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/TransactionDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Models/Payment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Payment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Models/Transaction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Services/PaymentRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Services/PaymentRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/Services/TransactionRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Services/TransactionRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Transaction/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/appsettings.json" afterDir="false" />
+    <list default="true" id="9a4ae814-d5f6-4331-ab4d-1616cbac24b7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/DeliveryInformationController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderDetailController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Infrastructure/OrderDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231018183139_add order.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231018183139_add order.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/DeliveryInformation.model.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Enums/OrderStatus.enum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/OrderDetail.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/efCoreDialogsState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/efCoreDialogsState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Transaction/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Infrastructure/TransactionDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231002163258_Initial.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231002163258_Initial.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231018165339_Add foreign key.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231018165339_Add foreign key.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/TransactionDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/TransactionDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Payment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Payment.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Services/PaymentRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Services/PaymentRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Services/TransactionRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Services/TransactionRepositoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +165,7 @@
       <workItem from="1696260087564" duration="4206000" />
       <workItem from="1696264356338" duration="2968000" />
       <workItem from="1696342857035" duration="9718000" />
-      <workItem from="1697645161560" duration="2819000" />
+      <workItem from="1697645161560" duration="9142000" />
     </task>
     <task id="LOCAL-00001" summary="Init repo">
       <option name="closed" value="true" />
@@ -194,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697646210859</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Change DB schema for Transaction">
+      <option name="closed" value="true" />
+      <created>1697648178310</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697648178310</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +205,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Init repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init repo" />
+    <MESSAGE value="Change DB schema for Transaction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change DB schema for Transaction" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

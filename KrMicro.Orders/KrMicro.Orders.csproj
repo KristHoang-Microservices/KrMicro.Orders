@@ -22,6 +22,8 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.32.3" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.3" />
     </ItemGroup>
@@ -33,11 +35,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\perfume\KrMicro.Core\KrMicro.Core.csproj" />
     </ItemGroup>
+
 
 </Project>
