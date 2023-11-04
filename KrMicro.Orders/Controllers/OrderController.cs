@@ -1,8 +1,10 @@
-﻿using KrMicro.Core.CQS.Query.Abstraction;
+﻿using KrMicro.Core.CQS.Command.Abstraction;
+using KrMicro.Core.CQS.Query.Abstraction;
 using KrMicro.Core.Models.Abstraction;
 using KrMicro.Orders.Constants;
 using KrMicro.Orders.CQS.Commands.Order;
 using KrMicro.Orders.CQS.Commands.Payment;
+using KrMicro.Orders.CQS.Queries.Order;
 using KrMicro.Orders.CQS.Queries.Payment;
 using KrMicro.Orders.Models;
 using KrMicro.Orders.Models.Enums;
@@ -165,7 +167,75 @@ public class OrderController : ControllerBase
         return new UpdateOrderStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
     }
 
-    // POST: api/Order/id/Confirm
+    [HttpPost("{id}/Confirm")]
+    public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusConfirm(short id)
+    {
+        var item = await _orderService.GetDetailAsync(x => x.Id == id);
+        if (item?.Id == null) return BadRequest();
+
+        item.OrderStatus = OrderStatus.Confirmed;
+        item.UpdatedAt = DateTimeOffset.UtcNow;
+        await _orderService.UpdateAsync(item);
+        return new UpdateStatusCommandResult("Order is confirmed!", true);
+    }
+
+    [HttpPost("{id}/Delivering")]
+    public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusDelivering(short id)
+    {
+        var item = await _orderService.GetDetailAsync(x => x.Id == id);
+        if (item?.Id == null) return BadRequest();
+
+        item.OrderStatus = OrderStatus.Delivering;
+        item.UpdatedAt = DateTimeOffset.UtcNow;
+        await _orderService.UpdateAsync(item);
+        return new UpdateStatusCommandResult("Order is on the way!", true);
+    }
+
+    [HttpPost("{id}/Returned")]
+    public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusDelivering(short id,
+        DateTimeOffset returnedDate)
+    {
+        var item = await _orderService.GetDetailAsync(x => x.Id == id);
+        if (item?.Id == null) return BadRequest();
+        if (item.OrderStatus != OrderStatus.Confirmed && item.OrderStatus != OrderStatus.Delivering)
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order is not confirmed yet", false));
+
+        item.OrderStatus = OrderStatus.Returned;
+        item.OrderDate = returnedDate.ToUniversalTime();
+        item.UpdatedAt = DateTimeOffset.UtcNow;
+        await _orderService.UpdateAsync(item);
+        return new UpdateStatusCommandResult("Order returned!", true);
+    }
+
+    [HttpPost("{id}/Canceled")]
+    public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusCancel(short id)
+    {
+        var item = await _orderService.GetDetailAsync(x => x.Id == id);
+        if (item?.Id == null) return BadRequest();
+        if (item.OrderStatus == OrderStatus.Success || item.OrderStatus == OrderStatus.Returned)
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order has been done!", false));
+
+        item.OrderStatus = OrderStatus.Cancelled;
+        item.UpdatedAt = DateTimeOffset.UtcNow;
+        await _orderService.UpdateAsync(item);
+        return new UpdateStatusCommandResult("Order canceled!", true);
+    }
+
+    [HttpPost("{id}/Success")]
+    public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusSuccess(short id,
+        DateTimeOffset receiveDate)
+    {
+        var item = await _orderService.GetDetailAsync(x => x.Id == id);
+        if (item?.Id == null) return BadRequest();
+        if (item.OrderStatus != OrderStatus.Confirmed && item.OrderStatus != OrderStatus.Delivering)
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order is not confirmed yet", false));
+
+        item.OrderStatus = OrderStatus.Cancelled;
+        item.OrderDate = receiveDate.ToUniversalTime();
+        item.UpdatedAt = DateTimeOffset.UtcNow;
+        await _orderService.UpdateAsync(item);
+        return new UpdateStatusCommandResult("Order is delivered successfully!", true);
+    }
 
     private async Task<bool> PaymentExists(short id)
     {

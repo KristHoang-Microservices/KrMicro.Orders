@@ -1,6 +1,6 @@
 ﻿using KrMicro.Core.CQS.Query.Abstraction;
 
-namespace KrMicro.Orders.CQS.Queries.Payment;
+namespace KrMicro.Orders.CQS.Queries.Order;
 
 public record GetAllOrderQueryRequest;
 

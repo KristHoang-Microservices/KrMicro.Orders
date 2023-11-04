@@ -10,38 +10,38 @@ namespace KrMicro.Orders.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-
 public class PaymentController : ControllerBase
 {
-    private IPaymentService _paymentService;
+    private readonly IPaymentService _paymentService;
 
     public PaymentController(IPaymentService paymentService)
     {
         _paymentService = paymentService;
     }
 
-    // GET: api/Payment
+    // GET: api/PaymentMethod
     [HttpGet]
     public async Task<ActionResult<GetAllPaymentQueryResult>> GetPayment()
     {
-        return new GetAllPaymentQueryResult(new List<Payment>(await _paymentService.GetAllAsync()));
+        return new GetAllPaymentQueryResult(new List<PaymentMethod>(await _paymentService.GetAllAsync()));
     }
-    
-    // GET: api/Payment/5
+
+    // GET: api/PaymentMethod/5
     [HttpGet("{id}")]
     public async Task<ActionResult<GetPaymentByIdQueryResult>> GetPayment(short id)
     {
         var item = await _paymentService.GetDetailAsync(item => item.Id == id);
 
-        if (item.Id == null) return BadRequest();
+        if (item == null) return BadRequest();
 
         return new GetPaymentByIdQueryResult(item);
     }
-    
-    // PATCH: api/Payment/5
+
+    // PATCH: api/PaymentMethod/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
-    public async Task<ActionResult<UpdatePaymentCommandResult>> PatchPayment(short id, UpdatePaymentCommandRequest request)
+    public async Task<ActionResult<UpdatePaymentCommandResult>> PatchPayment(short id,
+        UpdatePaymentCommandRequest request)
     {
         var item = await _paymentService.GetDetailAsync(x => x.Id == id);
         if (item.Id == null) return BadRequest();
@@ -50,13 +50,13 @@ public class PaymentController : ControllerBase
         var result = await _paymentService.UpdateAsync(item);
         return new UpdatePaymentCommandResult(result);
     }
-    
-    // POST: api/Payment
+
+    // POST: api/PaymentMethod
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<CreatePaymentCommandResult>> CreatePayment(CreatePaymentCommandRequest request)
     {
-        var newItem = new Payment
+        var newItem = new PaymentMethod
         {
             Name = request.Name,
             CreatedAt = DateTimeOffset.UtcNow,
@@ -65,8 +65,8 @@ public class PaymentController : ControllerBase
         var result = await _paymentService.InsertAsync(newItem);
         return new CreatePaymentCommandResult(result);
     }
-    
-    // POST: api/Payment/id
+
+    // POST: api/PaymentMethod/id
     [HttpPost("{id}/UpdateStatus")]
     public async Task<ActionResult<UpdatePaymentStatusCommandResult>> UpdateStatus(short id,
         UpdatePaymentStatusRequest request)
@@ -79,7 +79,7 @@ public class PaymentController : ControllerBase
 
         return new UpdatePaymentStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
     }
-    
+
     private async Task<bool> PaymentExists(short id)
     {
         return await _paymentService.CheckExistsAsync(e => e.Id == id);

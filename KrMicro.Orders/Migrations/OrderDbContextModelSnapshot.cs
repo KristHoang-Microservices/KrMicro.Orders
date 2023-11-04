@@ -38,6 +38,11 @@ namespace KrMicro.Orders.Migrations
                     b.Property<short?>("CustomerId")
                         .HasColumnType("smallint");
 
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CustomerName");
+
                     b.Property<string>("FullAddress")
                         .IsRequired()
                         .HasColumnType("text")
@@ -161,7 +166,7 @@ namespace KrMicro.Orders.Migrations
                     b.ToTable("OrderDetail");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Payment", b =>
+            modelBuilder.Entity("KrMicro.Orders.Models.PaymentMethod", b =>
                 {
                     b.Property<short?>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,7 +182,7 @@ namespace KrMicro.Orders.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<int?>("Status")
                         .HasColumnType("integer")
@@ -189,7 +194,7 @@ namespace KrMicro.Orders.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Payments");
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("KrMicro.Orders.Models.Transaction", b =>
@@ -216,7 +221,7 @@ namespace KrMicro.Orders.Migrations
                     b.Property<short>("OrderId_Transaction")
                         .HasColumnType("smallint");
 
-                    b.Property<short>("PaymentId")
+                    b.Property<short>("PaymentMethodId")
                         .HasColumnType("smallint");
 
                     b.Property<string>("PhoneNumber")
@@ -228,6 +233,10 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("Status");
 
+                    b.Property<int>("TransactionStatus")
+                        .HasColumnType("integer")
+                        .HasColumnName("TransactionStatus");
+
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("UpdatedAt");
@@ -236,7 +245,7 @@ namespace KrMicro.Orders.Migrations
 
                     b.HasIndex("OrderId_Transaction");
 
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("PaymentMethodId");
 
                     b.ToTable("Transactions");
                 });
@@ -271,15 +280,15 @@ namespace KrMicro.Orders.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KrMicro.Orders.Models.Payment", "Payment")
+                    b.HasOne("KrMicro.Orders.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Transactions")
-                        .HasForeignKey("PaymentId")
+                        .HasForeignKey("PaymentMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
 
-                    b.Navigation("Payment");
+                    b.Navigation("PaymentMethod");
                 });
 
             modelBuilder.Entity("KrMicro.Orders.Models.DeliveryInformation", b =>
@@ -294,7 +303,7 @@ namespace KrMicro.Orders.Migrations
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Payment", b =>
+            modelBuilder.Entity("KrMicro.Orders.Models.PaymentMethod", b =>
                 {
                     b.Navigation("Transactions");
                 });

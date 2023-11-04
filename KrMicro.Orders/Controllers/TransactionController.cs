@@ -3,6 +3,7 @@ using KrMicro.Orders.Constants;
 using KrMicro.Orders.CQS.Commands.Transaction;
 using KrMicro.Orders.CQS.Queries.Transaction;
 using KrMicro.Orders.Models;
+using KrMicro.Orders.Models.Enums;
 using KrMicro.Orders.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,19 @@ namespace KrMicro.Orders.Controllers;
 [ApiController]
 public class TransactionController : ControllerBase
 {
+    private readonly IOrderService _orderService;
     private readonly ITransactionService _transactionService;
 
-    public TransactionController(ITransactionService transactionService)
+    public TransactionController(ITransactionService transactionService, IOrderService orderService)
     {
         _transactionService = transactionService;
+        _orderService = orderService;
     }
 
 
     // GET: api/transaction
     [HttpGet]
-    public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransaction()
+    public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransactions()
     {
         return new GetAllTransactionQueryResult(new List<Transaction>(await _transactionService.GetAllAsync()));
     }
@@ -41,16 +44,16 @@ public class TransactionController : ControllerBase
     // PATCH: api/Transaction/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
-    public async Task<ActionResult<UpdateTransactionCommandResult>> PatchBrand(short id,
+    public async Task<ActionResult<UpdateTransactionCommandResult>> PatchTransaction(short id,
         UpdateTransactionCommandRequest request)
     {
         var item = await _transactionService.GetDetailAsync(x => x.Id == id);
-        if (item.Id == null) return BadRequest();
+        if (item?.Id == null) return BadRequest();
 
         item.CustomerId = request.CustomerId ?? item.CustomerId;
         item.PhoneNumber = request.PhoneNumber ?? item.PhoneNumber;
         item.OrderId = request.OrderId ?? item.OrderId;
-        item.PaymentId = request.PaymentId ?? item.PaymentId;
+        item.PaymentMethodId = request.PaymentId ?? item.PaymentMethodId;
         item.UpdatedAt = DateTimeOffset.UtcNow;
         var result = await _transactionService.UpdateAsync(item);
         return new UpdateTransactionCommandResult(result);
@@ -58,21 +61,97 @@ public class TransactionController : ControllerBase
 
     // POST: api/Transaction
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
-    public async Task<ActionResult<CreateTransactionCommandResult>> CreateTransaction(
+    [HttpPost("Cash")]
+    public async Task<ActionResult<CreateTransactionCommandResult>> CreateCashTransaction(
+        CreateTransactionCommandRequest request)
+    {
+        var order = await _orderService.GetDetailAsync(x => x.Id == request.OrderId);
+        if (order == null) return BadRequest("Order not found");
+
+        var newItem = new Transaction
+        {
+            OrderId = request.OrderId,
+            PaymentMethodId = request.PaymentId,
+            PhoneNumber = request.PhoneNumber,
+            CreatedAt = DateTimeOffset.UtcNow,
+            Status = Status.Available,
+            TransactionStatus = TransactionStatus.Pending
+        };
+        var result = await _transactionService.InsertAsync(newItem);
+        return new CreateTransactionCommandResult(result);
+    }
+
+    [HttpPost("Banking")]
+    public async Task<ActionResult<CreateTransactionCommandResult>> CreateBankingTransaction(
         CreateTransactionCommandRequest request)
     {
         var newItem = new Transaction
         {
-            CustomerId = request.CustomerId,
             PhoneNumber = request.PhoneNumber,
             OrderId = request.OrderId,
-            PaymentId = request.PaymentId,
+            PaymentMethodId = request.PaymentId,
             CreatedAt = DateTimeOffset.UtcNow,
-            Status = Status.Disable
+            Status = Status.Disable,
+            TransactionStatus = TransactionStatus.Pending
         };
         var result = await _transactionService.InsertAsync(newItem);
         return new CreateTransactionCommandResult(result);
+    }
+
+    [HttpPost("Qr")]
+    public async Task<ActionResult<CreateTransactionCommandResult>> CreateQrTransaction(
+        CreateTransactionCommandRequest request)
+    {
+        var newItem = new Transaction
+        {
+            PhoneNumber = request.PhoneNumber,
+            OrderId = request.OrderId,
+            PaymentMethodId = request.PaymentId,
+            CreatedAt = DateTimeOffset.UtcNow,
+            Status = Status.Disable,
+            TransactionStatus = TransactionStatus.Pending
+        };
+        var result = await _transactionService.InsertAsync(newItem);
+        return new CreateTransactionCommandResult(result);
+    }
+
+    // POST: api/Transaction/id
+    [HttpPost("{id}/Success")]
+    public async Task<ActionResult<UpdateTransactionStatusCommandResult>> ConfirmPaid(short id)
+    {
+        var item = await _transactionService.GetDetailAsync(x => x.Id == id);
+        if (item == null) return BadRequest();
+        item.TransactionStatus = TransactionStatus.Success;
+        item.CreatedAt = DateTimeOffset.UtcNow;
+        await _transactionService.UpdateAsync(item);
+
+        return new UpdateTransactionStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
+    }
+
+    // POST: api/Transaction/id
+    [HttpPost("{id}/Cancel")]
+    public async Task<ActionResult<UpdateTransactionStatusCommandResult>> CancelTransaction(short id)
+    {
+        var item = await _transactionService.GetDetailAsync(x => x.Id == id);
+        if (item == null) return BadRequest();
+        item.TransactionStatus = TransactionStatus.Cancel;
+        item.CreatedAt = DateTimeOffset.UtcNow;
+        await _transactionService.UpdateAsync(item);
+
+        return new UpdateTransactionStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
+    }
+
+    // POST: api/Transaction/id
+    [HttpPost("{id}/Failed")]
+    public async Task<ActionResult<UpdateTransactionStatusCommandResult>> SetFailedTransaction(short id)
+    {
+        var item = await _transactionService.GetDetailAsync(x => x.Id == id);
+        if (item == null) return BadRequest();
+        item.TransactionStatus = TransactionStatus.Failed;
+        item.CreatedAt = DateTimeOffset.UtcNow;
+        await _transactionService.UpdateAsync(item);
+
+        return new UpdateTransactionStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
     }
 
     // POST: api/Transaction/id

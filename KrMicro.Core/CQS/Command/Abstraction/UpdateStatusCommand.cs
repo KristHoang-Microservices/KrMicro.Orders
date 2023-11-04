@@ -1,6 +1,6 @@
 ﻿namespace KrMicro.Core.CQS.Command.Abstraction;
 
-public abstract class UpdateStatusCommandResult
+public class UpdateStatusCommandResult
 {
     public UpdateStatusCommandResult(string message, bool isSuccess)
     {

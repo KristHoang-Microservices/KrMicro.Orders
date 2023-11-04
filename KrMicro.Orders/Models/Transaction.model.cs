@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using KrMicro.Core.Models.Abstraction;
+using KrMicro.Orders.Models.Enums;
 
 namespace KrMicro.Orders.Models;
 
@@ -12,9 +13,11 @@ public class Transaction : BaseModelWithAuditAndTracking
 
     [Required] [Column("OrderId")] public short OrderId { get; set; }
 
-    [ForeignKey("PaymentId")] public short PaymentId { get; set; }
+    [ForeignKey("PaymentMethodId")] public short PaymentMethodId { get; set; }
 
-    public Payment Payment { get; set; }
+    [Column("TransactionStatus")] public TransactionStatus TransactionStatus { get; set; }
+
+    public PaymentMethod PaymentMethod { get; set; }
 
     public Order Order { get; set; }
 }

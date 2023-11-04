@@ -19,6 +19,7 @@ namespace KrMicro.Orders.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     FullAddress = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
+                    CustomerName = table.Column<string>(type: "text", nullable: false),
                     CustomerId = table.Column<short>(type: "smallint", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
@@ -30,19 +31,19 @@ namespace KrMicro.Orders.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
+                name: "PaymentMethods",
                 columns: table => new
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.PrimaryKey("PK_PaymentMethods", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,10 +52,11 @@ namespace KrMicro.Orders.Migrations
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    OrderDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     TotalAmount = table.Column<int>(type: "integer", nullable: false),
                     OrderStatus = table.Column<int>(type: "integer", nullable: false),
                     DeliveryInformationId = table.Column<short>(type: "smallint", nullable: false),
+                    Note = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true)
@@ -76,15 +78,18 @@ namespace KrMicro.Orders.Migrations
                 {
                     ProductId = table.Column<short>(type: "smallint", nullable: false),
                     OrderId = table.Column<short>(type: "smallint", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
-                    Price = table.Column<int>(type: "integer", nullable: false),
+                    SizeId = table.Column<short>(type: "smallint", nullable: false),
+                    Amount = table.Column<int>(type: "integer", nullable: false),
+                    SizeCode = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Id = table.Column<short>(type: "smallint", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetail", x => new { x.OrderId, x.ProductId });
+                    table.PrimaryKey("PK_OrderDetail", x => new { x.OrderId, x.ProductId, x.SizeId });
                     table.ForeignKey(
                         name: "FK_OrderDetail_Orders_OrderId",
                         column: x => x.OrderId,
@@ -102,7 +107,8 @@ namespace KrMicro.Orders.Migrations
                     CustomerId = table.Column<short>(type: "smallint", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     OrderId = table.Column<short>(type: "smallint", nullable: false),
-                    PaymentId = table.Column<short>(type: "smallint", nullable: false),
+                    PaymentMethodId = table.Column<short>(type: "smallint", nullable: false),
+                    TransactionStatus = table.Column<int>(type: "integer", nullable: false),
                     OrderId_Transaction = table.Column<short>(type: "smallint", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
@@ -118,9 +124,9 @@ namespace KrMicro.Orders.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transactions_Payments_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payments",
+                        name: "FK_Transactions_PaymentMethods_PaymentMethodId",
+                        column: x => x.PaymentMethodId,
+                        principalTable: "PaymentMethods",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -136,9 +142,9 @@ namespace KrMicro.Orders.Migrations
                 column: "OrderId_Transaction");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_PaymentId",
+                name: "IX_Transactions_PaymentMethodId",
                 table: "Transactions",
-                column: "PaymentId");
+                column: "PaymentMethodId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -153,7 +159,7 @@ namespace KrMicro.Orders.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Payments");
+                name: "PaymentMethods");
 
             migrationBuilder.DropTable(
                 name: "DeliveryInformation");

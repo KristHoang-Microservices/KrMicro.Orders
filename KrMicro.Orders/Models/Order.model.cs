@@ -14,8 +14,8 @@ public class Order : BaseModelWithAuditAndTracking
     [Column("OrderStatus")] public OrderStatus OrderStatus { get; set; }
 
     [ForeignKey("DeliveryInformationId")] public short DeliveryInformationId { get; set; }
-    
-    [Column("Note")] public string? Note { get; set; } = String.Empty;
+
+    [Column("Note")] public string? Note { get; set; } = string.Empty;
     //[ForeignKey("PromoId")] public short PromoId { get; set; }
 
     public List<OrderDetail> OrderDetails { get; set; }

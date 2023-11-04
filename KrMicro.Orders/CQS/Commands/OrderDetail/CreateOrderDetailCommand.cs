@@ -1,6 +1,6 @@
 ﻿using KrMicro.Core.CQS.Command.Abstraction;
 
-namespace KrMicro.Orders.CQS.Commands.Payment;
+namespace KrMicro.Orders.CQS.Commands.OrderDetail;
 
 public record CreateOrderDetailCommandRequest( short? ProductId);
 

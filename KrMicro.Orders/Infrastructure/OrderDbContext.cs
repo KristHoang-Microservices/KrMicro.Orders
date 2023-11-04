@@ -13,7 +13,7 @@ public class OrderDbContext : DbContext
     {
     }
 
-    public DbSet<Payment> Payments { get; set; }
+    public DbSet<PaymentMethod> Payments { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformations { get; set; }
@@ -21,10 +21,10 @@ public class OrderDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Transaction>().HasOne<Payment>(t => t.Payment).WithMany(p => p.Transactions)
-            .HasForeignKey("PaymentId");
+        modelBuilder.Entity<Transaction>().HasOne<PaymentMethod>(t => t.PaymentMethod).WithMany(p => p.Transactions)
+            .HasForeignKey("PaymentMethodId");
 
-        modelBuilder.Entity<Transaction>().Navigation(t => t.Payment).AutoInclude();
+        modelBuilder.Entity<Transaction>().Navigation(t => t.PaymentMethod).AutoInclude();
 
         modelBuilder.Entity<Order>().HasMany<OrderDetail>(o => o.OrderDetails).WithOne(d => d.Order)
             .HasForeignKey("OrderId").IsRequired();

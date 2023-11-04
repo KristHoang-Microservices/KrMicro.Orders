@@ -12,6 +12,8 @@ public class DeliveryInformation : BaseModelWithAuditAndTracking
 
     [Column("Phone")] public string Phone { get; set; }
 
+    [Column("CustomerName")] public string CustomerName { get; set; }
+
     [ForeignKey("CustomerId")] public short? CustomerId { get; set; }
 
     public List<Order> Orders { get; set; }
