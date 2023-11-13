@@ -2,10 +2,8 @@
 using KrMicro.Core.Models.Abstraction;
 using KrMicro.Orders.Constants;
 using KrMicro.Orders.CQS.Commands.DeliveryInformation;
-using KrMicro.Orders.CQS.Commands.Payment;
 using KrMicro.Orders.CQS.Queries.Api.Customer;
 using KrMicro.Orders.CQS.Queries.DeliveryInformation;
-using KrMicro.Orders.CQS.Queries.Payment;
 using KrMicro.Orders.Models;
 using KrMicro.Orders.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +23,13 @@ public class DeliveryInformationController : ControllerBase
 
     // GET: api/DeliveryInformation
     [HttpGet]
-    public async Task<ActionResult<GetAllDeliveryInformationQueryResult>> GetAllDeliveryInformation()
+    public async Task<ActionResult<GetAllDeliveryInformationQueryResult>> GetAllDeliveryInformation(
+        [FromQuery] short customerId)
     {
         return new GetAllDeliveryInformationQueryResult(
-            new List<DeliveryInformation>(await _deliveryInformationService.GetAllAsync()));
+            new List<DeliveryInformation>(
+                await _deliveryInformationService.GetAllWithFilterAsync(d =>
+                    d.CustomerId == customerId && d.Status == Status.Available)));
     }
 
     // GET: api/DeliveryInformation/5
@@ -88,9 +89,7 @@ public class DeliveryInformationController : ControllerBase
             {
                 var customer =
                     JsonSerializer.Deserialize<GetCustomerDetailQueryResult>(await res.Content.ReadAsStringAsync());
-                newItem.Phone = customer?.phone ?? newItem.Phone;
-                newItem.CustomerName = customer?.name ?? newItem.CustomerName;
-                newItem.CustomerId = request.CustomerId;
+                newItem.CustomerId = customer?.id;
             }
             else
             {

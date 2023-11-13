@@ -21,7 +21,7 @@ public class PaymentController : ControllerBase
 
     // GET: api/PaymentMethod
     [HttpGet]
-    public async Task<ActionResult<GetAllPaymentQueryResult>> GetPayment()
+    public async Task<ActionResult<GetAllPaymentQueryResult>> GetPayments()
     {
         return new GetAllPaymentQueryResult(new List<PaymentMethod>(await _paymentService.GetAllAsync()));
     }
@@ -44,9 +44,10 @@ public class PaymentController : ControllerBase
         UpdatePaymentCommandRequest request)
     {
         var item = await _paymentService.GetDetailAsync(x => x.Id == id);
-        if (item.Id == null) return BadRequest();
+        if (item == null) return BadRequest();
         item.Name = request.Name ?? item.Name;
         item.UpdatedAt = DateTimeOffset.UtcNow;
+        item.Description = request.Description ?? item.Description;
         var result = await _paymentService.UpdateAsync(item);
         return new UpdatePaymentCommandResult(result);
     }
@@ -59,6 +60,7 @@ public class PaymentController : ControllerBase
         var newItem = new PaymentMethod
         {
             Name = request.Name,
+            Description = request.Description,
             CreatedAt = DateTimeOffset.UtcNow,
             Status = Status.Disable
         };
@@ -72,7 +74,7 @@ public class PaymentController : ControllerBase
         UpdatePaymentStatusRequest request)
     {
         var item = await _paymentService.GetDetailAsync(x => x.Id == id);
-        if (item.Id == null) return BadRequest();
+        if (item == null) return BadRequest();
         item.Status = request.Status;
         item.CreatedAt = DateTimeOffset.UtcNow;
         await _paymentService.UpdateAsync(item);

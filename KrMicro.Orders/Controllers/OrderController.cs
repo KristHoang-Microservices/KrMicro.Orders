@@ -5,11 +5,12 @@ using KrMicro.Orders.Constants;
 using KrMicro.Orders.CQS.Commands.Order;
 using KrMicro.Orders.CQS.Commands.Payment;
 using KrMicro.Orders.CQS.Queries.Order;
-using KrMicro.Orders.CQS.Queries.Payment;
 using KrMicro.Orders.Models;
+using KrMicro.Orders.Models.Api.Products;
 using KrMicro.Orders.Models.Enums;
 using KrMicro.Orders.Models.ProductServices;
 using KrMicro.Orders.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -34,7 +35,7 @@ public class OrderController : ControllerBase
 
     // GET: api/Order
     [HttpGet]
-    public async Task<ActionResult<GetAllOrderQueryResult>> GetOrder()
+    public async Task<ActionResult<GetAllOrderQueryResult>> GetOrders()
     {
         return new GetAllOrderQueryResult(new List<Order>(await _orderService.GetAllAsync()));
     }
@@ -53,6 +54,7 @@ public class OrderController : ControllerBase
     // PATCH: api/Order/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
+    [Authorize]
     public async Task<ActionResult<UpdateOrderCommandResult>> PatchOrder(short id, UpdateOrderCommandRequest request)
     {
         var item = await _orderService.GetDetailAsync(x => x.Id == id);
@@ -121,9 +123,9 @@ public class OrderController : ControllerBase
         };
         var result = await _orderService.InsertAsync(newItem);
         await _orderService.AttachAsync(result);
-
         foreach (var detail in request.OrderDetails)
         {
+            var productSizes = new List<ProductSizes>();
             var newDetail = new OrderDetail
             {
                 ProductId = detail.ProductId,
@@ -143,6 +145,16 @@ public class OrderController : ControllerBase
                 newDetail.Price = productSize?.data?.price ?? 0;
                 newDetail.SizeId = productSize?.data?.sizeId ?? 0;
                 await _orderDetailService.InsertAsync(newDetail);
+
+                productSizes.Add(new ProductSizes
+                {
+                    sizeCode = newDetail.SizeCode,
+                    stock = (productSize?.data?.stock ?? 0) - newDetail.Amount
+                });
+                var productStockUpdate = await _client.PostAsync(ProductServiceAPI.UpdateStockById(detail.ProductId),
+                    JsonContent.Create(productSizes));
+
+                if (productStockUpdate.IsSuccessStatusCode) return BadRequest();
             }
             else
             {
@@ -150,11 +162,13 @@ public class OrderController : ControllerBase
             }
         }
 
+
         return new CreateOrderCommandResult(result);
     }
 
     // POST: api/Order/id
     [HttpPost("{id}/UpdateStatus")]
+    [Authorize("Admin,Employee,Customer")]
     public async Task<ActionResult<UpdateOrderStatusCommandResult>> UpdateStatus(short id,
         UpdatePaymentStatusRequest request)
     {

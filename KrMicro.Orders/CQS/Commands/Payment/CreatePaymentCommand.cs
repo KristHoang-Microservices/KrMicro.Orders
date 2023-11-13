@@ -3,7 +3,7 @@ using KrMicro.Orders.Models;
 
 namespace KrMicro.Orders.CQS.Commands.Payment;
 
-public record CreatePaymentCommandRequest(string Name);
+public record CreatePaymentCommandRequest(string Name, string? Description);
 
 public class CreatePaymentCommandResult : CreateCommandResult<PaymentMethod>
 {
