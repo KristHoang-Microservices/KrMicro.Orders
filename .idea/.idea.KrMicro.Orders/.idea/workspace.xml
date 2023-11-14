@@ -10,28 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db4c1e73-4d82-4d9d-96bf-487e418acefa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/58e5b50d-881d-4e5b-a475-15fbb382d5e5.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/5ea6e7c8-57a6-4257-82a7-b6789b7df737.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/cb9f438f-1c64-40e8-97b9-6fcbf5535b89.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/d8d8b9ef-a71a-4400-8994-952c5c3f4630.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Api/Product/UpdateStock.command.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/KrMicro.Orders.csproj.user" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Api/Products/ProductSizes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml.user" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/ServiceDependencies/krmicro-orders - Zip Deploy/profile.arm.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Core/Services/BaseRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Core/Services/BaseRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/CreatePaymentCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/CreatePaymentCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/UpdatePaymentCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Payment/UpdatePaymentCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/a437a1e6-24a1-4e6e-82cf-ee96926972e0.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/d8d8b9ef-a71a-4400-8994-952c5c3f4630.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Constants/ProductServiceAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Constants/ProductServiceAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/DeliveryInformationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/DeliveryInformationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/PaymentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/PaymentController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/OrderDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/OrderDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Payment.model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Payment.model.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Api/Products/ProductSizes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Api/Products/ProductSizes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml.user" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +36,7 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/23e31092363db7107ca21367adea927bccc2e7cf2075f9ee398ad1175b8e87/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2ab0c747811e9b9601498ef19b4b7a74679983ee71962f6ef6b46879342141/HttpClientJsonExtensions.Post.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/36d6248395d8f4c0a6e9fdf2ba8a20a532f46eb6dd6a7d04acfb5c2fc8cd71b/ForbidResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3bc445d0d7a9fbf039126b29a985669d984a5ede912ccb520195ab41b6c53d2/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
@@ -146,7 +135,9 @@
       <workItem from="1699183506116" duration="606000" />
       <workItem from="1699524167247" duration="1231000" />
       <workItem from="1699810903256" duration="3660000" />
-      <workItem from="1699847514871" duration="3806000" />
+      <workItem from="1699847514871" duration="7758000" />
+      <workItem from="1699859539691" duration="610000" />
+      <workItem from="1699949624082" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="Change mapping the core">
       <option name="closed" value="true" />
@@ -172,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699111073309</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="&#10;Update Stock">
+      <option name="closed" value="true" />
+      <created>1699851728711</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699851728711</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,9 +198,15 @@
     <MESSAGE value="Change mapping the core" />
     <MESSAGE value="Completed to add Order post and patch" />
     <MESSAGE value="Update delivery information" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update delivery information" />
+    <MESSAGE value="&#10;Update Stock" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;Update Stock" />
   </component>
   <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#KrMicro.Orders.Models.Api.Products.ProductSizes" memberName="sizeCode" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="this.&lt;productServiceResponse&gt;5__7.Content" />

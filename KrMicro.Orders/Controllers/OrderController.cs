@@ -75,6 +75,7 @@ public class OrderController : ControllerBase
         foreach (var t in updateTask) await t;
         item.OrderDetails = new List<OrderDetail>();
         item = await _orderService.UpdateAsync(item);
+        item.Total = 0;
         foreach (var od in request.OrderDetails)
         {
             var newOd = new OrderDetail
@@ -95,6 +96,7 @@ public class OrderController : ControllerBase
                 newOd.Price = productSize?.data?.price ?? 0;
                 newOd.SizeId = productSize?.data?.sizeId ?? 0;
                 await _orderDetailService.InsertAsync(newOd);
+                item.Total += newOd.Amount + newOd.Price;
             }
             else
             {
@@ -104,8 +106,8 @@ public class OrderController : ControllerBase
 
         item.Note = request.Note ?? item.Note;
         item.UpdatedAt = DateTimeOffset.UtcNow;
-        var result = await _orderService.UpdateAsync(item);
-        return new UpdateOrderCommandResult(result);
+        var order = await _orderService.UpdateAsync(item);
+        return new UpdateOrderCommandResult(order);
     }
 
     // POST: api/Order
@@ -121,16 +123,16 @@ public class OrderController : ControllerBase
             OrderStatus = OrderStatus.Pending,
             Note = request.Note
         };
-        var result = await _orderService.InsertAsync(newItem);
-        await _orderService.AttachAsync(result);
+
+        var order = await _orderService.InsertAsync(newItem);
+        await _orderService.AttachAsync(order);
         foreach (var detail in request.OrderDetails)
         {
-            var productSizes = new List<ProductSizes>();
             var newDetail = new OrderDetail
             {
                 ProductId = detail.ProductId,
                 Amount = detail.Amount,
-                OrderId = result.Id ?? -1,
+                OrderId = order.Id ?? -1,
                 SizeCode = detail.SizeCode
             };
 
@@ -146,15 +148,12 @@ public class OrderController : ControllerBase
                 newDetail.SizeId = productSize?.data?.sizeId ?? 0;
                 await _orderDetailService.InsertAsync(newDetail);
 
-                productSizes.Add(new ProductSizes
-                {
-                    sizeCode = newDetail.SizeCode,
-                    stock = (productSize?.data?.stock ?? 0) - newDetail.Amount
-                });
-                var productStockUpdate = await _client.PostAsync(ProductServiceAPI.UpdateStockById(detail.ProductId),
-                    JsonContent.Create(productSizes));
+                var productStockUpdate = await _client.PostAsync(
+                    ProductServiceAPI.UpdateStockById(detail.ProductId, newDetail.SizeCode),
+                    JsonContent.Create(new ProductSizes((productSize?.data?.stock ?? 0) - newDetail.Amount)));
+                if (!productStockUpdate.IsSuccessStatusCode) return BadRequest();
 
-                if (productStockUpdate.IsSuccessStatusCode) return BadRequest();
+                order.Total += newDetail.Amount + newDetail.Price;
             }
             else
             {
@@ -162,8 +161,8 @@ public class OrderController : ControllerBase
             }
         }
 
-
-        return new CreateOrderCommandResult(result);
+        order = await _orderService.UpdateAsync(order);
+        return new CreateOrderCommandResult(order);
     }
 
     // POST: api/Order/id

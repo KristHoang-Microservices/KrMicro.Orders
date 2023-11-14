@@ -3,6 +3,7 @@ using System;
 using KrMicro.Orders.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KrMicro.Orders.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    partial class OrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112175147_update payment method")]
+    partial class updatepaymentmethod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,9 +105,9 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("Status");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric")
-                        .HasColumnName("Total");
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("integer")
+                        .HasColumnName("TotalAmount");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")

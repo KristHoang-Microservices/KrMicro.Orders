@@ -9,7 +9,7 @@ public class Order : BaseModelWithAuditAndTracking
 {
     [Column("OrderDate")] public DateTimeOffset? OrderDate { get; set; }
 
-    [Column("TotalAmount")] public int TotalAmount { get; set; }
+    [Column("Total")] public decimal Total { get; set; }
 
     [Column("OrderStatus")] public OrderStatus OrderStatus { get; set; }
 
