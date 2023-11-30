@@ -24,23 +24,31 @@ public class OrderController : ControllerBase
     private readonly IDeliveryInformationService _deliveryInformationService;
     private readonly IOrderDetailService _orderDetailService;
     private readonly IOrderService _orderService;
+    private readonly ITransactionService _transactionService;
 
     public OrderController(IOrderService orderService, IOrderDetailService orderDetailService,
-        IDeliveryInformationService deliveryInformationService)
+        IDeliveryInformationService deliveryInformationService, ITransactionService transactionService)
     {
         _orderService = orderService;
         _orderDetailService = orderDetailService;
         _deliveryInformationService = deliveryInformationService;
+        _transactionService = transactionService;
     }
 
-    // GET: api/Order
+    // GET: api/Orders
     [HttpGet]
-    public async Task<ActionResult<GetAllOrderQueryResult>> GetOrders()
+    public async Task<ActionResult<GetAllOrderQueryResult>> GetOrders([FromQuery] GetAllOrderQueryRequest request)
     {
-        return new GetAllOrderQueryResult(new List<Order>(await _orderService.GetAllAsync()));
+        var filter = new OrderQueryFilter(request);
+
+        var list = new List<Order>(await _orderService.GetAllAsync());
+
+        list = list.FindAll(o => filter.Validate(o));
+
+        return Ok(new GetAllOrderQueryResult(list));
     }
 
-    // GET: api/Order/5
+    // GET: api/Orders/5
     [HttpGet("{id}")]
     public async Task<ActionResult<GetOrderByIdQueryResult>> GetOrder(short id)
     {
@@ -51,7 +59,7 @@ public class OrderController : ControllerBase
         return new GetOrderByIdQueryResult(item);
     }
 
-    // PATCH: api/Order/5
+    // PATCH: api/Orders/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPatch("{id}")]
     [Authorize]
@@ -110,7 +118,7 @@ public class OrderController : ControllerBase
         return new UpdateOrderCommandResult(order);
     }
 
-    // POST: api/Order
+    // POST: api/Orders
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<CreateOrderCommandResult>> CreateOrder(CreateOrderCommandRequest request)
@@ -133,7 +141,8 @@ public class OrderController : ControllerBase
                 ProductId = detail.ProductId,
                 Amount = detail.Amount,
                 OrderId = order.Id ?? -1,
-                SizeCode = detail.SizeCode
+                SizeCode = detail.SizeCode,
+                CreatedAt = DateTimeOffset.UtcNow
             };
 
             var productServiceResponse =
@@ -162,10 +171,54 @@ public class OrderController : ControllerBase
         }
 
         order = await _orderService.UpdateAsync(order);
+        var deliveryDetail = await _deliveryInformationService.GetDetailAsync(x => x.Id == order.DeliveryInformationId);
+        var newTrans = new Transaction
+        {
+            CustomerId = deliveryDetail?.CustomerId,
+            CustomerName = deliveryDetail?.CustomerName,
+            PhoneNumber = deliveryDetail?.Phone ?? "",
+            OrderId = order.Id ?? -1,
+            PaymentMethodId = request.PaymentMethodId,
+            TransactionStatus = TransactionStatus.Pending,
+            CreatedAt = DateTimeOffset.UtcNow,
+            Status = Status.Available,
+            Total = order.Total
+        };
+        await _transactionService.InsertAsync(newTrans);
+
         return new CreateOrderCommandResult(order);
     }
 
-    // POST: api/Order/id
+    [HttpPost("CheckOrder")]
+    public async Task<ActionResult> CheckOrderQuantity(CheckOrderCommandRequest request)
+    {
+        var outQuantityProducts = new List<FaultProductQuantity>();
+        foreach (var detail in request.OrderDetails)
+        {
+            var productServiceResponse =
+                await _client.GetAsync(ProductServiceAPI.GetProductByIdAndSize(detail.ProductId, detail.SizeCode));
+
+            if (productServiceResponse.IsSuccessStatusCode)
+            {
+                var res = await productServiceResponse.Content.ReadAsStringAsync();
+                var productSize = JsonConvert.DeserializeObject<GetByIdQueryResult<ProductSize>>(res);
+
+                if (productSize?.data?.stock < detail.Amount)
+                    outQuantityProducts.Add(new FaultProductQuantity(detail.SizeCode, detail.ProductId));
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        if (outQuantityProducts.Count > 0)
+            return Ok(new CheckOrderCommandResult("Một số sản phẩm đã hết hàng!", outQuantityProducts, false));
+
+        return Ok(new CheckOrderCommandResult("Hàng họ đủ đầy", new List<FaultProductQuantity>()));
+    }
+
+    // POST: api/Orders/id
     [HttpPost("{id}/UpdateStatus")]
     [Authorize("Admin,Employee,Customer")]
     public async Task<ActionResult<UpdateOrderStatusCommandResult>> UpdateStatus(short id,
@@ -180,7 +233,7 @@ public class OrderController : ControllerBase
         return new UpdateOrderStatusCommandResult(NetworkSuccessResponse.UpdateStatusSuccess);
     }
 
-    [HttpPost("{id}/Confirm")]
+    [HttpPost("{id}/Confirmed")]
     public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusConfirm(short id)
     {
         var item = await _orderService.GetDetailAsync(x => x.Id == id);
@@ -189,7 +242,7 @@ public class OrderController : ControllerBase
         item.OrderStatus = OrderStatus.Confirmed;
         item.UpdatedAt = DateTimeOffset.UtcNow;
         await _orderService.UpdateAsync(item);
-        return new UpdateStatusCommandResult("Order is confirmed!", true);
+        return new UpdateStatusCommandResult("Orders is confirmed!", true);
     }
 
     [HttpPost("{id}/Delivering")]
@@ -200,8 +253,9 @@ public class OrderController : ControllerBase
 
         item.OrderStatus = OrderStatus.Delivering;
         item.UpdatedAt = DateTimeOffset.UtcNow;
+        item.OrderDate = DateTimeOffset.UtcNow;
         await _orderService.UpdateAsync(item);
-        return new UpdateStatusCommandResult("Order is on the way!", true);
+        return new UpdateStatusCommandResult("Orders is on the way!", true);
     }
 
     [HttpPost("{id}/Returned")]
@@ -211,27 +265,27 @@ public class OrderController : ControllerBase
         var item = await _orderService.GetDetailAsync(x => x.Id == id);
         if (item?.Id == null) return BadRequest();
         if (item.OrderStatus != OrderStatus.Confirmed && item.OrderStatus != OrderStatus.Delivering)
-            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order is not confirmed yet", false));
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Orders is not confirmed yet", false));
 
         item.OrderStatus = OrderStatus.Returned;
         item.OrderDate = returnedDate.ToUniversalTime();
         item.UpdatedAt = DateTimeOffset.UtcNow;
         await _orderService.UpdateAsync(item);
-        return new UpdateStatusCommandResult("Order returned!", true);
+        return new UpdateStatusCommandResult("Orders returned!", true);
     }
 
-    [HttpPost("{id}/Canceled")]
+    [HttpPost("{id}/Cancelled")]
     public async Task<ActionResult<UpdateStatusCommandResult>> UpdateOrderStatusCancel(short id)
     {
         var item = await _orderService.GetDetailAsync(x => x.Id == id);
         if (item?.Id == null) return BadRequest();
         if (item.OrderStatus == OrderStatus.Success || item.OrderStatus == OrderStatus.Returned)
-            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order has been done!", false));
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Orders has been done!", false));
 
         item.OrderStatus = OrderStatus.Cancelled;
         item.UpdatedAt = DateTimeOffset.UtcNow;
         await _orderService.UpdateAsync(item);
-        return new UpdateStatusCommandResult("Order canceled!", true);
+        return new UpdateStatusCommandResult("Orders canceled!", true);
     }
 
     [HttpPost("{id}/Success")]
@@ -241,13 +295,13 @@ public class OrderController : ControllerBase
         var item = await _orderService.GetDetailAsync(x => x.Id == id);
         if (item?.Id == null) return BadRequest();
         if (item.OrderStatus != OrderStatus.Confirmed && item.OrderStatus != OrderStatus.Delivering)
-            return new BadRequestObjectResult(new UpdateStatusCommandResult("Order is not confirmed yet", false));
+            return new BadRequestObjectResult(new UpdateStatusCommandResult("Orders is not confirmed yet", false));
 
-        item.OrderStatus = OrderStatus.Cancelled;
+        item.OrderStatus = OrderStatus.Success;
         item.OrderDate = receiveDate.ToUniversalTime();
         item.UpdatedAt = DateTimeOffset.UtcNow;
         await _orderService.UpdateAsync(item);
-        return new UpdateStatusCommandResult("Order is delivered successfully!", true);
+        return new UpdateStatusCommandResult("Orders is delivered successfully!", true);
     }
 
     private async Task<bool> PaymentExists(short id)

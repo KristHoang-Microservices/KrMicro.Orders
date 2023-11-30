@@ -22,7 +22,7 @@ public class OrderDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Transaction>().HasOne<PaymentMethod>(t => t.PaymentMethod).WithMany(p => p.Transactions)
-            .HasForeignKey("PaymentMethodId");
+            .HasForeignKey("PaymentMethodId").IsRequired();
 
         modelBuilder.Entity<Transaction>().Navigation(t => t.PaymentMethod).AutoInclude();
 
@@ -39,7 +39,9 @@ public class OrderDbContext : DbContext
         modelBuilder.Entity<Order>().Navigation(o => o.DeliveryInformation).AutoInclude();
 
         modelBuilder.Entity<Transaction>().HasOne<Order>(t => t.Order).WithMany(o => o.Transactions)
-            .HasForeignKey("OrderId_Transaction").IsRequired();
+            .HasForeignKey("OrderId").IsRequired();
+
+        modelBuilder.Entity<Order>().Navigation(o => o.Transactions).AutoInclude();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)

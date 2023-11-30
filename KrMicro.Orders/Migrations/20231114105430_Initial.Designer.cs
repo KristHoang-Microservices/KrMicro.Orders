@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KrMicro.Orders.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20231114082007_change total column def")]
-    partial class changetotalcolumndef
+    [Migration("20231114105430_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,16 +216,17 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreatedAt");
 
-                    b.Property<short>("CustomerId")
+                    b.Property<short?>("CustomerId")
                         .HasColumnType("smallint")
                         .HasColumnName("CustomerId");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("text")
+                        .HasColumnName("CustomerName");
 
                     b.Property<short>("OrderId")
                         .HasColumnType("smallint")
                         .HasColumnName("OrderId");
-
-                    b.Property<short>("OrderId_Transaction")
-                        .HasColumnType("smallint");
 
                     b.Property<short>("PaymentMethodId")
                         .HasColumnType("smallint");
@@ -249,7 +250,7 @@ namespace KrMicro.Orders.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId_Transaction");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -282,7 +283,7 @@ namespace KrMicro.Orders.Migrations
                 {
                     b.HasOne("KrMicro.Orders.Models.Order", "Order")
                         .WithMany("Transactions")
-                        .HasForeignKey("OrderId_Transaction")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

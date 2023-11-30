@@ -36,7 +36,8 @@ namespace KrMicro.Orders.Migrations
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true)
@@ -53,7 +54,7 @@ namespace KrMicro.Orders.Migrations
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     OrderDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    TotalAmount = table.Column<int>(type: "integer", nullable: false),
+                    Total = table.Column<decimal>(type: "numeric", nullable: false),
                     OrderStatus = table.Column<int>(type: "integer", nullable: false),
                     DeliveryInformationId = table.Column<short>(type: "smallint", nullable: false),
                     Note = table.Column<string>(type: "text", nullable: true),
@@ -104,12 +105,12 @@ namespace KrMicro.Orders.Migrations
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CustomerId = table.Column<short>(type: "smallint", nullable: false),
+                    CustomerId = table.Column<short>(type: "smallint", nullable: true),
+                    CustomerName = table.Column<string>(type: "text", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     OrderId = table.Column<short>(type: "smallint", nullable: false),
                     PaymentMethodId = table.Column<short>(type: "smallint", nullable: false),
                     TransactionStatus = table.Column<int>(type: "integer", nullable: false),
-                    OrderId_Transaction = table.Column<short>(type: "smallint", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true)
@@ -118,8 +119,8 @@ namespace KrMicro.Orders.Migrations
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transactions_Orders_OrderId_Transaction",
-                        column: x => x.OrderId_Transaction,
+                        name: "FK_Transactions_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -137,9 +138,9 @@ namespace KrMicro.Orders.Migrations
                 column: "DeliveryInformationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_OrderId_Transaction",
+                name: "IX_Transactions_OrderId",
                 table: "Transactions",
-                column: "OrderId_Transaction");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_PaymentMethodId",

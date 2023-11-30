@@ -8,34 +8,34 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EntityFramework" Version="6.4.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.22" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
+        <PackageReference Include="EntityFramework" Version="6.4.4"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.22"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.22" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.22"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.22">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.32.3" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.32.3"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.3" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.3"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KrMicro.Core\KrMicro.Core.csproj" />
+        <ProjectReference Include="..\KrMicro.Core\KrMicro.Core.csproj"/>
     </ItemGroup>
 
 

@@ -25,9 +25,23 @@ public class TransactionController : ControllerBase
 
     // GET: api/transaction
     [HttpGet]
-    public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransactions()
+    public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransactions(
+        [FromQuery] GetAllTransactionQueryRequest request)
     {
-        return new GetAllTransactionQueryResult(new List<Transaction>(await _transactionService.GetAllAsync()));
+        var filter = new TransactionQueryFilter(request);
+
+        var list = new List<Transaction>(await _transactionService.GetAllAsync());
+
+        list = list.FindAll(o => filter.Validate(o));
+        return new GetAllTransactionQueryResult(new List<Transaction>(list));
+    }
+
+    // GET: api/transaction/orderId
+    [HttpGet("Orders/{orderId}")]
+    public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransactionsByOrderId(short orderId)
+    {
+        return new GetAllTransactionQueryResult(
+            new List<Transaction>(await _transactionService.GetAllWithFilterAsync(x => x.OrderId == orderId)));
     }
 
     // GET: api/Transaction/5
@@ -66,7 +80,7 @@ public class TransactionController : ControllerBase
         CreateTransactionCommandRequest request)
     {
         var order = await _orderService.GetDetailAsync(x => x.Id == request.OrderId);
-        if (order == null) return BadRequest("Order not found");
+        if (order == null) return BadRequest("Orders not found");
 
         var newItem = new Transaction
         {

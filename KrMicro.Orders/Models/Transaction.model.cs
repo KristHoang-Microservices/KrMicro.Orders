@@ -8,8 +8,10 @@ namespace KrMicro.Orders.Models;
 [Table("Transactions")]
 public class Transaction : BaseModelWithAuditAndTracking
 {
-    [Column("CustomerId")] public short CustomerId { get; set; }
-    [Required] [Column("PhoneNumber")] public string PhoneNumber { get; set; }
+    [Column("CustomerId")] public short? CustomerId { get; set; }
+    [Column("CustomerName")] public string? CustomerName { get; set; }
+    [Required] [Column("PhoneNumber")] public string PhoneNumber { get; set; } = string.Empty;
+    [Required] [Column("Total")] public decimal Total { get; set; }
 
     [Required] [Column("OrderId")] public short OrderId { get; set; }
 

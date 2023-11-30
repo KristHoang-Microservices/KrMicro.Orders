@@ -71,7 +71,7 @@ namespace KrMicro.Orders.Migrations
                     b.ToTable("DeliveryInformation");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Order", b =>
+            modelBuilder.Entity("KrMicro.Orders.Models.Orders", b =>
                 {
                     b.Property<short?>("Id")
                         .ValueGeneratedOnAdd()
@@ -214,16 +214,17 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreatedAt");
 
-                    b.Property<short>("CustomerId")
+                    b.Property<short?>("CustomerId")
                         .HasColumnType("smallint")
                         .HasColumnName("CustomerId");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("text")
+                        .HasColumnName("CustomerName");
 
                     b.Property<short>("OrderId")
                         .HasColumnType("smallint")
                         .HasColumnName("OrderId");
-
-                    b.Property<short>("OrderId_Transaction")
-                        .HasColumnType("smallint");
 
                     b.Property<short>("PaymentMethodId")
                         .HasColumnType("smallint");
@@ -237,6 +238,10 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("Status");
 
+                    b.Property<decimal>("Total")
+                        .HasColumnType("numeric")
+                        .HasColumnName("Total");
+
                     b.Property<int>("TransactionStatus")
                         .HasColumnType("integer")
                         .HasColumnName("TransactionStatus");
@@ -247,14 +252,14 @@ namespace KrMicro.Orders.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId_Transaction");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("PaymentMethodId");
 
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Order", b =>
+            modelBuilder.Entity("KrMicro.Orders.Models.Orders", b =>
                 {
                     b.HasOne("KrMicro.Orders.Models.DeliveryInformation", "DeliveryInformation")
                         .WithMany("Orders")
@@ -267,20 +272,20 @@ namespace KrMicro.Orders.Migrations
 
             modelBuilder.Entity("KrMicro.Orders.Models.OrderDetail", b =>
                 {
-                    b.HasOne("KrMicro.Orders.Models.Order", "Order")
+                    b.HasOne("KrMicro.Orders.Models.Orders", "Orders")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("KrMicro.Orders.Models.Transaction", b =>
                 {
-                    b.HasOne("KrMicro.Orders.Models.Order", "Order")
+                    b.HasOne("KrMicro.Orders.Models.Orders", "Orders")
                         .WithMany("Transactions")
-                        .HasForeignKey("OrderId_Transaction")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -290,7 +295,7 @@ namespace KrMicro.Orders.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("Orders");
 
                     b.Navigation("PaymentMethod");
                 });
@@ -300,7 +305,7 @@ namespace KrMicro.Orders.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Order", b =>
+            modelBuilder.Entity("KrMicro.Orders.Models.Orders", b =>
                 {
                     b.Navigation("OrderDetails");
 
