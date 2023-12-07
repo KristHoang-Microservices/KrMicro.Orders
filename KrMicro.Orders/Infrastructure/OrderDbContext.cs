@@ -42,6 +42,10 @@ public class OrderDbContext : DbContext
             .HasForeignKey("OrderId").IsRequired();
 
         modelBuilder.Entity<Order>().Navigation(o => o.Transactions).AutoInclude();
+        modelBuilder.Entity<Order>().HasOne(o => o.Promo).WithMany().HasForeignKey("PromoId").IsRequired(false);
+        modelBuilder.Entity<Order>().Navigation(o => o.Promo).AutoInclude();
+
+        modelBuilder.Entity<Promo>().HasIndex(p => p.Code).IsUnique();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)

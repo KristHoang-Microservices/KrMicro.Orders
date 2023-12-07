@@ -13,6 +13,9 @@ public class DeliveryInformation : BaseModelWithAuditAndTracking
     [Column("Phone")] public string Phone { get; set; }
 
     [Column("CustomerName")] public string CustomerName { get; set; }
+    [Column("CityId")] public short CityId { get; set; }
+    [Column("DistrictId")] public short DistrictId { get; set; }
+    [Column("WardId")] public short WardId { get; set; }
 
     [ForeignKey("CustomerId")] public short? CustomerId { get; set; }
 

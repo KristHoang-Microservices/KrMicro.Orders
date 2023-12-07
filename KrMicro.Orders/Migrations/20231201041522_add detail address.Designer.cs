@@ -3,6 +3,7 @@ using System;
 using KrMicro.Orders.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KrMicro.Orders.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    partial class OrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231201041522_add detail address")]
+    partial class adddetailaddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,9 +113,6 @@ namespace KrMicro.Orders.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("OrderStatus");
 
-                    b.Property<short?>("PromoId")
-                        .HasColumnType("smallint");
-
                     b.Property<int?>("Status")
                         .HasColumnType("integer")
                         .HasColumnName("Status");
@@ -129,8 +128,6 @@ namespace KrMicro.Orders.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DeliveryInformationId");
-
-                    b.HasIndex("PromoId");
 
                     b.ToTable("Orders");
                 });
@@ -218,61 +215,6 @@ namespace KrMicro.Orders.Migrations
                     b.ToTable("PaymentMethods");
                 });
 
-            modelBuilder.Entity("KrMicro.Orders.Models.Promo", b =>
-                {
-                    b.Property<short?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<short?>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Code");
-
-                    b.Property<DateTimeOffset?>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("CreatedAt");
-
-                    b.Property<DateTimeOffset>("EndDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("EndDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Name");
-
-                    b.Property<int>("PromoUnit")
-                        .HasColumnType("integer")
-                        .HasColumnName("PromoUnit");
-
-                    b.Property<DateTimeOffset>("StartDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("StartDate");
-
-                    b.Property<int?>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("Status");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("UpdatedAt");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("numeric")
-                        .HasColumnName("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
-
-                    b.ToTable("Promo");
-                });
-
             modelBuilder.Entity("KrMicro.Orders.Models.Transaction", b =>
                 {
                     b.Property<short?>("Id")
@@ -339,13 +281,7 @@ namespace KrMicro.Orders.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KrMicro.Orders.Models.Promo", "Promo")
-                        .WithMany()
-                        .HasForeignKey("PromoId");
-
                     b.Navigation("DeliveryInformation");
-
-                    b.Navigation("Promo");
                 });
 
             modelBuilder.Entity("KrMicro.Orders.Models.OrderDetail", b =>

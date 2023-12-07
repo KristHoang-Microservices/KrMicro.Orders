@@ -15,12 +15,15 @@ public class Order : BaseModelWithAuditAndTracking
 
     [ForeignKey("DeliveryInformationId")] public short DeliveryInformationId { get; set; }
 
+    [ForeignKey("PromoId")] public short? PromoId { get; set; }
+
     [Column("Note")] public string? Note { get; set; } = string.Empty;
-    //[ForeignKey("PromoId")] public short PromoId { get; set; }
 
     public List<OrderDetail> OrderDetails { get; set; }
 
     public DeliveryInformation DeliveryInformation { get; set; }
 
     public List<Transaction> Transactions { get; set; }
+
+    public Promo? Promo { get; set; }
 }

@@ -3,7 +3,15 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>16386||-9223372036854775808|c|G
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G
+16386||-9223372036854775808|c|G
 16386||16384|c|G
 16386||16385|c|G
 16386||16384|C|G
@@ -35,9 +43,9 @@
 32875||-9223372036854775808|T|G
 32875||16384|T|G
 32875||16385|T|G</Grants>
-      <IntrospectionStateNumber>87135</IntrospectionStateNumber>
+      <IntrospectionStateNumber>109568</IntrospectionStateNumber>
       <ServerVersion>15.4</ServerVersion>
-      <StartupTime>1699957572</StartupTime>
+      <StartupTime>1701664465</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -833,7 +841,7 @@ false Zulu
 12401||10|C|G
 12401||-9223372036854775808|U|G
 12401||10|U|G</Grants>
-      <IntrospectionStateNumber>87135</IntrospectionStateNumber>
+      <IntrospectionStateNumber>109568</IntrospectionStateNumber>
       <ObjectId>32875</ObjectId>
       <OwnerName>khanhworktime</OwnerName>
     </database>
@@ -4288,9 +4296,9 @@ false Zulu
     <schema id="268" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>87135</IntrospectionStateNumber>
-      <IntrospectionTimestamp>2023-11-14.17:54:49.574</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-11-14.10:54:51</LocalIntrospectionTimestamp>
+      <IntrospectionStateNumber>109568</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2023-12-04.11:34:44.838</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-04.04:34:48</LocalIntrospectionTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>517</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4298,7 +4306,7 @@ false Zulu
     <sequence id="269" parent="268" name="DeliveryInformation_Id_seq">
       <DasType>smallint|0s</DasType>
       <ObjectId>139269</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(23)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>87134</StateNumber>
       <OwnerName>khanhworktime</OwnerName>
@@ -4306,7 +4314,7 @@ false Zulu
     <sequence id="270" parent="268" name="Orders_Id_seq">
       <DasType>smallint|0s</DasType>
       <ObjectId>139285</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(37)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>87134</StateNumber>
       <OwnerName>khanhworktime</OwnerName>
@@ -4314,56 +4322,70 @@ false Zulu
     <sequence id="271" parent="268" name="PaymentMethods_Id_seq">
       <DasType>smallint|0s</DasType>
       <ObjectId>139277</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(4)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>87134</StateNumber>
       <OwnerName>khanhworktime</OwnerName>
     </sequence>
-    <sequence id="272" parent="268" name="Transactions_Id_seq">
+    <sequence id="272" parent="268" name="Promo_Id_seq">
+      <DasType>smallint|0s</DasType>
+      <ObjectId>188416</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>108544</StateNumber>
+      <OwnerName>khanhworktime</OwnerName>
+    </sequence>
+    <sequence id="273" parent="268" name="Transactions_Id_seq">
       <DasType>smallint|0s</DasType>
       <ObjectId>139310</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(46)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>87134</StateNumber>
       <OwnerName>khanhworktime</OwnerName>
     </sequence>
-    <table id="273" parent="268" name="DeliveryInformation">
+    <table id="274" parent="268" name="DeliveryInformation">
       <ObjectId>139270</ObjectId>
-      <StateNumber>87134</StateNumber>
+      <StateNumber>104448</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <table id="274" parent="268" name="OrderDetail">
+    <table id="275" parent="268" name="OrderDetail">
       <ObjectId>139298</ObjectId>
       <StateNumber>87134</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <table id="275" parent="268" name="Orders">
+    <table id="276" parent="268" name="Orders">
       <ObjectId>139286</ObjectId>
-      <StateNumber>87134</StateNumber>
+      <StateNumber>108544</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <table id="276" parent="268" name="PaymentMethods">
+    <table id="277" parent="268" name="PaymentMethods">
       <ObjectId>139278</ObjectId>
       <StateNumber>87134</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <table id="277" parent="268" name="Transactions">
-      <ObjectId>139311</ObjectId>
-      <StateNumber>87134</StateNumber>
+    <table id="278" parent="268" name="Promo">
+      <ObjectId>188417</ObjectId>
+      <StateNumber>108544</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <table id="278" parent="268" name="__EFMigrationsHistory">
+    <table id="279" parent="268" name="Transactions">
+      <ObjectId>139311</ObjectId>
+      <StateNumber>93184</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>khanhworktime</OwnerName>
+    </table>
+    <table id="280" parent="268" name="__EFMigrationsHistory">
       <ObjectId>139264</ObjectId>
       <StateNumber>87133</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>khanhworktime</OwnerName>
     </table>
-    <column id="279" parent="273" name="Id">
+    <column id="281" parent="274" name="Id">
       <DasType>smallint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4372,59 +4394,83 @@ false Zulu
       <SequenceId>139269</SequenceId>
       <TypeId>21</TypeId>
     </column>
-    <column id="280" parent="273" name="Name">
+    <column id="282" parent="274" name="Name">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="281" parent="273" name="FullAddress">
+    <column id="283" parent="274" name="FullAddress">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="282" parent="273" name="Phone">
+    <column id="284" parent="274" name="Phone">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="283" parent="273" name="CustomerName">
+    <column id="285" parent="274" name="CustomerName">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="284" parent="273" name="CustomerId">
+    <column id="286" parent="274" name="CustomerId">
       <DasType>smallint|0s</DasType>
       <Position>6</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="285" parent="273" name="CreatedAt">
+    <column id="287" parent="274" name="CreatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>7</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="286" parent="273" name="UpdatedAt">
+    <column id="288" parent="274" name="UpdatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>8</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="287" parent="273" name="Status">
+    <column id="289" parent="274" name="Status">
       <DasType>integer|0s</DasType>
       <Position>9</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="288" parent="273" name="PK_DeliveryInformation">
+    <column id="290" parent="274" name="CityId">
+      <DasType>smallint|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+      <StateNumber>104448</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="291" parent="274" name="DistrictId">
+      <DasType>smallint|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+      <StateNumber>104448</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="292" parent="274" name="WardId">
+      <DasType>smallint|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>12</Position>
+      <StateNumber>104448</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <index id="293" parent="274" name="PK_DeliveryInformation">
       <ColNames>Id</ColNames>
       <ObjectId>139275</ObjectId>
       <Primary>1</Primary>
@@ -4432,79 +4478,79 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="289" parent="273" name="PK_DeliveryInformation">
+    <key id="294" parent="274" name="PK_DeliveryInformation">
       <ObjectId>139276</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87134</StateNumber>
       <UnderlyingIndexId>139275</UnderlyingIndexId>
     </key>
-    <column id="290" parent="274" name="ProductId">
+    <column id="295" parent="275" name="ProductId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="291" parent="274" name="OrderId">
+    <column id="296" parent="275" name="OrderId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="292" parent="274" name="SizeId">
+    <column id="297" parent="275" name="SizeId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="293" parent="274" name="Amount">
+    <column id="298" parent="275" name="Amount">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="294" parent="274" name="SizeCode">
+    <column id="299" parent="275" name="SizeCode">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="295" parent="274" name="Price">
+    <column id="300" parent="275" name="Price">
       <DasType>numeric|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="296" parent="274" name="Id">
+    <column id="301" parent="275" name="Id">
       <DasType>smallint|0s</DasType>
       <Position>7</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="297" parent="274" name="CreatedAt">
+    <column id="302" parent="275" name="CreatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>8</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="298" parent="274" name="UpdatedAt">
+    <column id="303" parent="275" name="UpdatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>9</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="299" parent="274" name="Status">
+    <column id="304" parent="275" name="Status">
       <DasType>integer|0s</DasType>
       <Position>10</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="300" parent="274" name="FK_OrderDetail_Orders_OrderId">
+    <foreign-key id="305" parent="275" name="FK_OrderDetail_Orders_OrderId">
       <ColNames>OrderId</ColNames>
       <ObjectId>139305</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4512,7 +4558,7 @@ false Zulu
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>139286</RefTableId>
     </foreign-key>
-    <index id="301" parent="274" name="PK_OrderDetail">
+    <index id="306" parent="275" name="PK_OrderDetail">
       <ColNames>OrderId
 ProductId
 SizeId</ColNames>
@@ -4522,13 +4568,13 @@ SizeId</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="302" parent="274" name="PK_OrderDetail">
+    <key id="307" parent="275" name="PK_OrderDetail">
       <ObjectId>139304</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87134</StateNumber>
       <UnderlyingIndexId>139303</UnderlyingIndexId>
     </key>
-    <column id="303" parent="275" name="Id">
+    <column id="308" parent="276" name="Id">
       <DasType>smallint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4537,58 +4583,64 @@ SizeId</ColNames>
       <SequenceId>139285</SequenceId>
       <TypeId>21</TypeId>
     </column>
-    <column id="304" parent="275" name="OrderDate">
+    <column id="309" parent="276" name="OrderDate">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>2</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="305" parent="275" name="Total">
+    <column id="310" parent="276" name="Total">
       <DasType>numeric|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1700</TypeId>
     </column>
-    <column id="306" parent="275" name="OrderStatus">
+    <column id="311" parent="276" name="OrderStatus">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="307" parent="275" name="DeliveryInformationId">
+    <column id="312" parent="276" name="DeliveryInformationId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="308" parent="275" name="Note">
+    <column id="313" parent="276" name="Note">
       <DasType>text|0s</DasType>
       <Position>6</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="309" parent="275" name="CreatedAt">
+    <column id="314" parent="276" name="CreatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>7</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="310" parent="275" name="UpdatedAt">
+    <column id="315" parent="276" name="UpdatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>8</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="311" parent="275" name="Status">
+    <column id="316" parent="276" name="Status">
       <DasType>integer|0s</DasType>
       <Position>9</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="312" parent="275" name="FK_Orders_DeliveryInformation_DeliveryInformationId">
+    <column id="317" parent="276" name="PromoId">
+      <DasType>smallint|0s</DasType>
+      <Position>10</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <foreign-key id="318" parent="276" name="FK_Orders_DeliveryInformation_DeliveryInformationId">
       <ColNames>DeliveryInformationId</ColNames>
       <ObjectId>139293</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4596,7 +4648,14 @@ SizeId</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>139270</RefTableId>
     </foreign-key>
-    <index id="313" parent="275" name="PK_Orders">
+    <foreign-key id="319" parent="276" name="FK_Orders_Promo_PromoId">
+      <ColNames>PromoId</ColNames>
+      <ObjectId>188425</ObjectId>
+      <StateNumber>108544</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>188417</RefTableId>
+    </foreign-key>
+    <index id="320" parent="276" name="PK_Orders">
       <ColNames>Id</ColNames>
       <ObjectId>139291</ObjectId>
       <Primary>1</Primary>
@@ -4604,19 +4663,25 @@ SizeId</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="314" parent="275" name="IX_Orders_DeliveryInformationId">
+    <index id="321" parent="276" name="IX_Orders_DeliveryInformationId">
       <ColNames>DeliveryInformationId</ColNames>
       <ObjectId>139328</ObjectId>
       <StateNumber>87134</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="315" parent="275" name="PK_Orders">
+    <index id="322" parent="276" name="IX_Orders_PromoId">
+      <ColNames>PromoId</ColNames>
+      <ObjectId>188424</ObjectId>
+      <StateNumber>108544</StateNumber>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="323" parent="276" name="PK_Orders">
       <ObjectId>139292</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87134</StateNumber>
       <UnderlyingIndexId>139291</UnderlyingIndexId>
     </key>
-    <column id="316" parent="276" name="Id">
+    <column id="324" parent="277" name="Id">
       <DasType>smallint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4625,38 +4690,38 @@ SizeId</ColNames>
       <SequenceId>139277</SequenceId>
       <TypeId>21</TypeId>
     </column>
-    <column id="317" parent="276" name="Name">
+    <column id="325" parent="277" name="Name">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="318" parent="276" name="Description">
+    <column id="326" parent="277" name="Description">
       <DasType>text|0s</DasType>
       <Position>3</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="319" parent="276" name="CreatedAt">
+    <column id="327" parent="277" name="CreatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>4</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="320" parent="276" name="UpdatedAt">
+    <column id="328" parent="277" name="UpdatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>5</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="321" parent="276" name="Status">
+    <column id="329" parent="277" name="Status">
       <DasType>integer|0s</DasType>
       <Position>6</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="322" parent="276" name="PK_PaymentMethods">
+    <index id="330" parent="277" name="PK_PaymentMethods">
       <ColNames>Id</ColNames>
       <ObjectId>139283</ObjectId>
       <Primary>1</Primary>
@@ -4664,13 +4729,96 @@ SizeId</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="323" parent="276" name="PK_PaymentMethods">
+    <key id="331" parent="277" name="PK_PaymentMethods">
       <ObjectId>139284</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87134</StateNumber>
       <UnderlyingIndexId>139283</UnderlyingIndexId>
     </key>
-    <column id="324" parent="277" name="Id">
+    <column id="332" parent="278" name="Id">
+      <DasType>smallint|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>108544</StateNumber>
+      <SequenceId>188416</SequenceId>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="333" parent="278" name="Name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="334" parent="278" name="Code">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="335" parent="278" name="Value">
+      <DasType>numeric|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="336" parent="278" name="PromoUnit">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="337" parent="278" name="StartDate">
+      <DasType>timestamp with time zone|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="338" parent="278" name="EndDate">
+      <DasType>timestamp with time zone|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="339" parent="278" name="CreatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>8</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="340" parent="278" name="UpdatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <Position>9</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <column id="341" parent="278" name="Status">
+      <DasType>integer|0s</DasType>
+      <Position>10</Position>
+      <StateNumber>108544</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="342" parent="278" name="PK_Promo">
+      <ColNames>Id</ColNames>
+      <ObjectId>188422</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>108544</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="343" parent="278" name="PK_Promo">
+      <ObjectId>188423</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>108544</StateNumber>
+      <UnderlyingIndexId>188422</UnderlyingIndexId>
+    </key>
+    <column id="344" parent="279" name="Id">
       <DasType>smallint|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4679,65 +4827,73 @@ SizeId</ColNames>
       <SequenceId>139310</SequenceId>
       <TypeId>21</TypeId>
     </column>
-    <column id="325" parent="277" name="CustomerId">
+    <column id="345" parent="279" name="CustomerId">
       <DasType>smallint|0s</DasType>
       <Position>2</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="326" parent="277" name="CustomerName">
+    <column id="346" parent="279" name="CustomerName">
       <DasType>text|0s</DasType>
       <Position>3</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="327" parent="277" name="PhoneNumber">
+    <column id="347" parent="279" name="PhoneNumber">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="328" parent="277" name="OrderId">
+    <column id="348" parent="279" name="OrderId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="329" parent="277" name="PaymentMethodId">
+    <column id="349" parent="279" name="PaymentMethodId">
       <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="330" parent="277" name="TransactionStatus">
+    <column id="350" parent="279" name="TransactionStatus">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="331" parent="277" name="CreatedAt">
+    <column id="351" parent="279" name="CreatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>8</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="332" parent="277" name="UpdatedAt">
+    <column id="352" parent="279" name="UpdatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <Position>9</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="333" parent="277" name="Status">
+    <column id="353" parent="279" name="Status">
       <DasType>integer|0s</DasType>
       <Position>10</Position>
       <StateNumber>87134</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="334" parent="277" name="FK_Transactions_Orders_OrderId">
+    <column id="354" parent="279" name="Total">
+      <DasType>numeric|0s</DasType>
+      <DefaultExpression>0.0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+      <StateNumber>93184</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <foreign-key id="355" parent="279" name="FK_Transactions_Orders_OrderId">
       <ColNames>OrderId</ColNames>
       <ObjectId>139318</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4745,7 +4901,7 @@ SizeId</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>139286</RefTableId>
     </foreign-key>
-    <foreign-key id="335" parent="277" name="FK_Transactions_PaymentMethods_PaymentMethodId">
+    <foreign-key id="356" parent="279" name="FK_Transactions_PaymentMethods_PaymentMethodId">
       <ColNames>PaymentMethodId</ColNames>
       <ObjectId>139323</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4753,7 +4909,7 @@ SizeId</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>139278</RefTableId>
     </foreign-key>
-    <index id="336" parent="277" name="PK_Transactions">
+    <index id="357" parent="279" name="PK_Transactions">
       <ColNames>Id</ColNames>
       <ObjectId>139316</ObjectId>
       <Primary>1</Primary>
@@ -4761,39 +4917,39 @@ SizeId</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="337" parent="277" name="IX_Transactions_OrderId">
+    <index id="358" parent="279" name="IX_Transactions_OrderId">
       <ColNames>OrderId</ColNames>
       <ObjectId>139329</ObjectId>
       <StateNumber>87134</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="338" parent="277" name="IX_Transactions_PaymentMethodId">
+    <index id="359" parent="279" name="IX_Transactions_PaymentMethodId">
       <ColNames>PaymentMethodId</ColNames>
       <ObjectId>139330</ObjectId>
       <StateNumber>87134</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="339" parent="277" name="PK_Transactions">
+    <key id="360" parent="279" name="PK_Transactions">
       <ObjectId>139317</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87134</StateNumber>
       <UnderlyingIndexId>139316</UnderlyingIndexId>
     </key>
-    <column id="340" parent="278" name="MigrationId">
+    <column id="361" parent="280" name="MigrationId">
       <DasType>varchar(150)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>87133</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="341" parent="278" name="ProductVersion">
+    <column id="362" parent="280" name="ProductVersion">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>87133</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="342" parent="278" name="PK___EFMigrationsHistory">
+    <index id="363" parent="280" name="PK___EFMigrationsHistory">
       <ColNames>MigrationId</ColNames>
       <ObjectId>139267</ObjectId>
       <Primary>1</Primary>
@@ -4804,7 +4960,7 @@ SizeId</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="343" parent="278" name="PK___EFMigrationsHistory">
+    <key id="364" parent="280" name="PK___EFMigrationsHistory">
       <ObjectId>139268</ObjectId>
       <Primary>1</Primary>
       <StateNumber>87133</StateNumber>

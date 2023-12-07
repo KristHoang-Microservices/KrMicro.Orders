@@ -56,6 +56,9 @@ public class DeliveryInformationController : ControllerBase
         item.FullAddress = request.FullAddress ?? item.FullAddress;
         item.CustomerName = request.CustomerName ?? item.CustomerName;
         item.Phone = request.Phone ?? item.Phone;
+        item.CityId = request.CityId ?? item.CityId;
+        item.DistrictId = request.DistrictId ?? item.DistrictId;
+        item.WardId = request.WardId ?? item.WardId;
         item.UpdatedAt = DateTimeOffset.UtcNow;
 
         var result = await _deliveryInformationService.UpdateAsync(item);
@@ -77,6 +80,9 @@ public class DeliveryInformationController : ControllerBase
             Phone = request.Phone,
             FullAddress = request.FullAddress,
             CreatedAt = DateTimeOffset.UtcNow,
+            CityId = request.CityId,
+            DistrictId = request.DistrictId,
+            WardId = request.WardId,
             Status = Status.Available
         };
 

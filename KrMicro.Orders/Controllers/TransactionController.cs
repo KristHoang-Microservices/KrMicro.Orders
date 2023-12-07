@@ -3,6 +3,7 @@ using KrMicro.Orders.Constants;
 using KrMicro.Orders.CQS.Commands.Transaction;
 using KrMicro.Orders.CQS.Queries.Transaction;
 using KrMicro.Orders.Models;
+using KrMicro.Orders.Models.Api;
 using KrMicro.Orders.Models.Enums;
 using KrMicro.Orders.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,15 @@ namespace KrMicro.Orders.Controllers;
 public class TransactionController : ControllerBase
 {
     private readonly IOrderService _orderService;
+    private readonly IPromoService _promoService;
     private readonly ITransactionService _transactionService;
 
-    public TransactionController(ITransactionService transactionService, IOrderService orderService)
+    public TransactionController(ITransactionService transactionService, IOrderService orderService,
+        IPromoService promoService)
     {
         _transactionService = transactionService;
         _orderService = orderService;
+        _promoService = promoService;
     }
 
 
@@ -112,21 +116,110 @@ public class TransactionController : ControllerBase
         return new CreateTransactionCommandResult(result);
     }
 
-    [HttpPost("Qr")]
-    public async Task<ActionResult<CreateTransactionCommandResult>> CreateQrTransaction(
-        CreateTransactionCommandRequest request)
+    [HttpPost("VnPay")]
+    public async Task<ActionResult<CreateVnPayTransactionCommandResult>> CreateVnPayTransaction(
+        CreateVnPayTransactionCommandRequest request)
     {
-        var newItem = new Transaction
+        var order = await _orderService.GetDetailAsync(x => x.Id == request.OrderId);
+        var transaction = new Transaction
         {
             PhoneNumber = request.PhoneNumber,
             OrderId = request.OrderId,
-            PaymentMethodId = request.PaymentId,
+            PaymentMethodId = request.PaymentMethodId,
             CreatedAt = DateTimeOffset.UtcNow,
             Status = Status.Disable,
-            TransactionStatus = TransactionStatus.Pending
+            TransactionStatus = TransactionStatus.Pending,
+            Total = order?.Total ?? 0
         };
-        var result = await _transactionService.InsertAsync(newItem);
-        return new CreateTransactionCommandResult(result);
+
+        if (order?.Promo != null)
+            switch (order?.Promo.PromoUnit)
+            {
+                case PromoUnit.Raw:
+                    transaction.Total -= order.Promo.Value;
+                    break;
+                case PromoUnit.Percent:
+                    transaction.Total -= order.Promo.Value * transaction.Total;
+                    break;
+            }
+
+        transaction = await _transactionService.InsertAsync(transaction);
+
+        var vnpay = new VnPayLibrary();
+
+        vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+        vnpay.AddRequestData("vnp_Command", "pay");
+        vnpay.AddRequestData("vnp_TmnCode", "HVR0T9T5");
+        vnpay.AddRequestData("vnp_Amount", $"{(int)(transaction.Total * 100)}");
+
+        // Can be add other type of billing
+
+        vnpay.AddRequestData("vnp_CreateDate",
+            DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(7)).ToString("yyyyMMddHHmmss"));
+        vnpay.AddRequestData("vnp_CurrCode", "VND");
+        vnpay.AddRequestData("vnp_IpAddr", HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString());
+        vnpay.AddRequestData("vnp_Locale", "vn");
+        vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang : " + transaction.OrderId);
+        vnpay.AddRequestData("vnp_OrderType", "other");
+
+        vnpay.AddRequestData("vnp_ReturnUrl", "https://localhost:7140/api/Transaction/VnPayReturn");
+        vnpay.AddRequestData("vnp_TxnRef", $"{transaction.Id}");
+
+        var paymentUrl = vnpay.CreateRequestUrl("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+            "BLWIVSEWVFLOGDKXPXNGNHQUZTBDTHEZ");
+
+        return new CreateVnPayTransactionCommandResult(paymentUrl, transaction.Id ?? -1);
+    }
+
+    [HttpGet("VnPayReturn")]
+    public async Task<ActionResult> VnPayReturnMessage()
+    {
+        var vnpayData = HttpContext.Request.Query;
+        var vnpay = new VnPayLibrary();
+        var vnp_HashSecret = "BLWIVSEWVFLOGDKXPXNGNHQUZTBDTHEZ";
+        foreach (var s in vnpayData)
+            //get all querystring data
+            if (!string.IsNullOrEmpty(s.Value) && s.Key.StartsWith("vnp_"))
+                vnpay.AddResponseData(s.Key, s.Value);
+
+        var transactionId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
+        var vnpayTranId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
+        var vnpResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
+        var vnpTransactionStatus = vnpay.GetResponseData("vnp_TransactionStatus");
+        string vnpSecureHash = HttpContext.Request.Query["vnp_SecureHash"];
+
+
+        var checkSignature = vnpay.ValidateSignature(vnpSecureHash, vnp_HashSecret);
+        if (checkSignature)
+        {
+            var item = await _transactionService.GetDetailAsync(x => x.Id == transactionId);
+            if (item == null) return BadRequest();
+            if (vnpResponseCode == "00" && vnpTransactionStatus == "00")
+            {
+                //Thanh toan thanh cong
+                item.TransactionStatus = TransactionStatus.Success;
+                item.UpdatedAt = DateTimeOffset.UtcNow;
+                await _transactionService.UpdateAsync(item);
+                return new JsonResult("Thanh toán thành công");
+            }
+
+            item.TransactionStatus = TransactionStatus.Failed;
+            item.UpdatedAt = DateTimeOffset.UtcNow;
+            //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
+            return BadRequest("Đã xảy ra lỗi giao dịch!");
+        }
+
+        return BadRequest("Lỗi giao dịch");
+    }
+
+    [HttpGet("CheckVnPay/{transactionId}")]
+    public async Task<ActionResult> CheckVnPay(short transactionId)
+    {
+        var transaction = await _transactionService.GetDetailAsync(x => x.Id == transactionId);
+        if (transaction == null) return BadRequest("Not Found");
+
+        while (transaction.TransactionStatus != TransactionStatus.Success) return BadRequest("Pending");
+        return Ok(transaction);
     }
 
     // POST: api/Transaction/id

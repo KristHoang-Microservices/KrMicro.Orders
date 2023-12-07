@@ -72,7 +72,7 @@ public class ReportController : ControllerBase
 
 
         var orders = new List<Order>(await _orderService.GetAllAsync()).FindAll(o =>
-            new OrderQueryFilter(new GetAllOrderQueryRequest(null, null, fromDate, toDate)).Validate(o));
+            new OrderQueryFilter(new GetAllOrderQueryRequest(OrderStatus.Success, null, fromDate, toDate)).Validate(o));
 
         var init = new IncomeChartPoint { Total = 0 };
         chart.Revenue = new List<IncomeChartPoint>

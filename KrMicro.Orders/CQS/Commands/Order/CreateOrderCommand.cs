@@ -5,7 +5,7 @@ namespace KrMicro.Orders.CQS.Commands.Order;
 public record OrderDetailRequest(short ProductId, short Amount, string SizeCode);
 
 public record CreateOrderCommandRequest(short DeliveryInformationId, List<OrderDetailRequest> OrderDetails,
-    string? Note, short PaymentMethodId);
+    string? Note, short PaymentMethodId, short? PromoId);
 
 public class CreateOrderCommandResult : CreateCommandResult<Models.Order>
 {

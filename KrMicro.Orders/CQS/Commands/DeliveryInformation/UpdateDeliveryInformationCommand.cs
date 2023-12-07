@@ -3,7 +3,7 @@
 namespace KrMicro.Orders.CQS.Commands.DeliveryInformation;
 
 public record UpdateDeliveryInformationCommandRequest(string? Name, string? CustomerName, string? FullAddress,
-    string? Phone);
+    string? Phone, short? CityId, short? DistrictId, short? WardId);
 
 public class UpdateDeliveryInformationCommandResult : UpdateCommandResult<Models.DeliveryInformation>
 {

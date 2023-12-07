@@ -55,6 +55,7 @@ builder.Services.AddScoped<ITransactionService, TransactionRepositoryService>();
 builder.Services.AddScoped<IDeliveryInformationService, DeliveryInformationRepositoryService>();
 builder.Services.AddScoped<IOrderService, OrderRepositoryService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailRepositoryService>();
+builder.Services.AddScoped<IPromoService, PromoRepositoryService>();
 
 builder.Services.AddCors(options =>
 {

@@ -9,44 +9,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db4c1e73-4d82-4d9d-96bf-487e418acefa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/KrMicro.Core/CQS/Query/Abstraction/AbstractFilter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Core/CQS/Query/Abstraction/IQueryFilter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Order/CheckOrderCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Order/OrderQueryFilter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Transaction/TransactionQueryFilter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/ReportController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Enums/TimeRange.enum.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Reports/IncomeChart.model.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Reports/TotalIncome.model.cs" afterDir="false" />
+    <list default="true" id="db4c1e73-4d82-4d9d-96bf-487e418acefa" name="Changes" comment="Update vnpay">
+      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/34617405-8d60-41e7-a311-ff80cf8fafab.vsidx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/41b72bd7-853f-4bea-92cc-423fb1e7ec39.vsidx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/60340ff3-130b-4e4f-8eae-016a53fe22f1.vsidx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/a2faaa37-0450-4d96-b5a1-4ce8976ebd9e.vsidx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Promo/CreatePromoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Promo/UpdatePromoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Promo/UpdatePromoStatusCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Transaction/CreateVnPayTransactionCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Promo/GetAllPaymentQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Promo/GetPaymentByIdQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/PromoController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231201041522_add detail address.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231201041522_add detail address.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231204042837_add promo model.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231204042837_add promo model.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Api/VnPayLibrary.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Enums/PromoUnit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Promo.model.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KrMicro.Orders/Services/PromoRepositoryService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/dataSources/75cc456b-8c32-4586-a6c6-aa98286fabd0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/dataSources/75cc456b-8c32-4586-a6c6-aa98286fabd0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/dataSources/75cc456b-8c32-4586-a6c6-aa98286fabd0/storage_v2/_src_/database/KrMicro.Orders.lpy0XA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/dataSources/75cc456b-8c32-4586-a6c6-aa98286fabd0/storage_v2/_src_/database/KrMicro.Orders.lpy0XA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KrMicro.Orders/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/0c2b9554-0a44-43ad-9db7-1a1aeb99955c.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/307d507d-b31c-4a9a-815d-f2d3fad4abe0.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/548e9ae6-22d3-41ae-8ee5-1251e75c4843.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/58e5b50d-881d-4e5b-a475-15fbb382d5e5.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/FileContentIndex/cb9f438f-1c64-40e8-97b9-6fcbf5535b89.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.futdcache.v2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/KrMicro.Orders/v17/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/krmicro.orders.metadata.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/krmicro.orders.metadata.v7.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/krmicro.orders.projects.v7.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/krmicro.orders.projects.v7.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/DeliveryInformation/CreateDeliveryInformationCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/DeliveryInformation/CreateDeliveryInformationCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/DeliveryInformation/UpdateDeliveryInformationCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/DeliveryInformation/UpdateDeliveryInformationCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Order/CreateOrderCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Commands/Order/CreateOrderCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Order/GetAllOrderQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Order/GetAllOrderQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Transaction/GetAllTransactionQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Transaction/GetAllTransactionQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/DeliveryInformationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/DeliveryInformationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/ReportController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/ReportController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Controllers/TransactionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Controllers/TransactionController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Infrastructure/OrderDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Infrastructure/OrderDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/KrMicro.Orders.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/KrMicro.Orders.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231104150610_Initial.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231104150610_Initial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231114105430_Initial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231112175147_update payment method.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231112175147_update payment method.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231114082007_change total column def.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231114105430_Initial.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/20231114082007_change total column def.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Migrations/OrderDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Migrations/OrderDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/DeliveryInformation.model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/DeliveryInformation.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml.user" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KrMicro.Orders/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/KrMicro.Orders/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,12 +68,16 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1c5ae7aa27a87d65dd39429e7e28c412409121c9aed3db8bf37e366e77ed4a/HttpContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/23e31092363db7107ca21367adea927bccc2e7cf2075f9ee398ad1175b8e87/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2ab0c747811e9b9601498ef19b4b7a74679983ee71962f6ef6b46879342141/HttpClientJsonExtensions.Post.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/36d6248395d8f4c0a6e9fdf2ba8a20a532f46eb6dd6a7d04acfb5c2fc8cd71b/ForbidResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3bc445d0d7a9fbf039126b29a985669d984a5ede912ccb520195ab41b6c53d2/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d9a41d47547e1fe7fe548b21ab4de12cc2671170a023bc8c629017837eb5f4/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/89d12e679032f7f4fad1e3d72e6c4d59ae9ea4bc2f7bf56fc15ae9fb2378bc4/PageResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8e84a1ebc351cc423079a7f782d97b53acb54484a4ffc48feb172318ee56/PageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a9cbda3784706aeeed61f1a08a18046925b69f777943eca27fbbcca09dff60/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KrMicro.Orders/CQS/Queries/Promo/GetAllPaymentQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KrMicro.Orders/Models/DeliveryInformation.model.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KrMicro.Orders/Models/Order.model.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KrMicro.Orders/Models/Transaction.model.cs" root0="FORCE_HIGHLIGHTING" />
@@ -85,36 +94,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\KristHoang\\AppData\\Roaming\\npm\\node_modules\\prettier&quot;,
-    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\KristHoang\\AppData\\Roaming\\npm\\node_modules\\prettier",
+    "rider.code.cleanup.on.save": "true",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\KristHoang\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\KristHoang\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\KristHoang\\AppData\\Local\\Symbols\\src&quot;
+    "rider.external.source.directories": [
+      "C:\\Users\\KristHoang\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\KristHoang\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\KristHoang\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.KrMicro.Orders: KrMicro.Transaction">
     <configuration name="KrMicro.Orders: krmicro-orders - Zip Deploy" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="krmicro-orders - Zip Deploy.pubxml" pubxml_path="$PROJECT_DIR$/KrMicro.Orders/Properties/PublishProfiles/krmicro-orders - Zip Deploy.pubxml" uuid_high="-3911928117878438061" uuid_low="-6405740267964310120" />
@@ -185,7 +194,14 @@
       <workItem from="1701151169869" duration="6073000" />
       <workItem from="1701232173309" duration="1825000" />
       <workItem from="1701323678862" duration="6892000" />
-      <workItem from="1701360499105" duration="2541000" />
+      <workItem from="1701360499105" duration="3168000" />
+      <workItem from="1701400828895" duration="2711000" />
+      <workItem from="1701403706915" duration="3186000" />
+      <workItem from="1701546215769" duration="7224000" />
+      <workItem from="1701662939402" duration="4239000" />
+      <workItem from="1701672289367" duration="2759000" />
+      <workItem from="1701778025114" duration="614000" />
+      <workItem from="1701972843745" duration="10093000" />
     </task>
     <task id="LOCAL-00001" summary="Change mapping the core">
       <option name="closed" value="true" />
@@ -227,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699950512388</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add ReportController.cs">
+      <option name="closed" value="true" />
+      <created>1701370141068</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701370141068</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +280,9 @@
     <MESSAGE value="Update delivery information" />
     <MESSAGE value="&#10;Update Stock" />
     <MESSAGE value="update order total function" />
-    <option name="LAST_COMMIT_MESSAGE" value="update order total function" />
+    <MESSAGE value="Add ReportController.cs" />
+    <MESSAGE value="Update vnpay" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update vnpay" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -275,14 +301,14 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/KrMicro.Orders/Controllers/OrderController.cs</url>
-          <line>124</line>
-          <properties documentPath="F:\Projects\Krist_Microservice\KrMicro.Orders\KrMicro.Orders\Controllers\OrderController.cs" initialLine="118" containingFunctionPresentation="Method 'CreateOrder'">
+          <url>file://$PROJECT_DIR$/KrMicro.Orders/Controllers/TransactionController.cs</url>
+          <line>159</line>
+          <properties documentPath="F:\Projects\Krist_Microservice\KrMicro.Orders\KrMicro.Orders\Controllers\TransactionController.cs" initialLine="161" containingFunctionPresentation="Method 'CreateVnPayTransaction'">
             <startOffsets>
-              <option value="4766" />
+              <option value="6166" />
             </startOffsets>
             <endOffsets>
-              <option value="4767" />
+              <option value="6264" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
@@ -292,6 +318,7 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#KrMicro.Orders.Models.Api.Products.ProductSizes" memberName="sizeCode" />
+        <PinnedItemInfo parentTag="Type#Microsoft.AspNetCore.Http.DefaultConnectionInfo" memberName="RemoteIpAddress" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

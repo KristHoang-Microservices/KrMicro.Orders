@@ -24,15 +24,18 @@ public class OrderController : ControllerBase
     private readonly IDeliveryInformationService _deliveryInformationService;
     private readonly IOrderDetailService _orderDetailService;
     private readonly IOrderService _orderService;
+    private readonly IPromoService _promoService;
     private readonly ITransactionService _transactionService;
 
     public OrderController(IOrderService orderService, IOrderDetailService orderDetailService,
-        IDeliveryInformationService deliveryInformationService, ITransactionService transactionService)
+        IDeliveryInformationService deliveryInformationService, ITransactionService transactionService,
+        IPromoService promoService)
     {
         _orderService = orderService;
         _orderDetailService = orderDetailService;
         _deliveryInformationService = deliveryInformationService;
         _transactionService = transactionService;
+        _promoService = promoService;
     }
 
     // GET: api/Orders
@@ -55,6 +58,26 @@ public class OrderController : ControllerBase
         var item = await _orderService.GetDetailAsync(item => item.Id == id);
 
         if (item?.Id == null) return BadRequest();
+
+        return new GetOrderByIdQueryResult(item);
+    }
+
+    // GET: api/Orders/5
+    [HttpGet("{id}/Web")]
+    public async Task<ActionResult<GetOrderByIdQueryResult>> GetOrderWeb(short id)
+    {
+        var item = await _orderService.GetDetailAsync(item => item.Id == id);
+        if (item?.Id == null) return BadRequest();
+        if (item.Promo != null)
+            switch (item.Promo.PromoUnit)
+            {
+                case PromoUnit.Raw:
+                    item.Total -= item.Promo.Value;
+                    break;
+                case PromoUnit.Percent:
+                    item.Total -= item.Promo.Value * item.Total;
+                    break;
+            }
 
         return new GetOrderByIdQueryResult(item);
     }
@@ -129,6 +152,7 @@ public class OrderController : ControllerBase
             CreatedAt = DateTimeOffset.UtcNow,
             Status = Status.Available,
             OrderStatus = OrderStatus.Pending,
+            PromoId = request.PromoId,
             Note = request.Note
         };
 
@@ -184,6 +208,20 @@ public class OrderController : ControllerBase
             Status = Status.Available,
             Total = order.Total
         };
+
+        var promo = await _promoService.GetDetailAsync(p => p.Id == request.PromoId);
+
+        if (promo != null)
+            switch (promo.PromoUnit)
+            {
+                case PromoUnit.Raw:
+                    newTrans.Total -= promo.Value;
+                    break;
+                case PromoUnit.Percent:
+                    newTrans.Total -= promo.Value * newTrans.Total;
+                    break;
+            }
+
         await _transactionService.InsertAsync(newTrans);
 
         return new CreateOrderCommandResult(order);
