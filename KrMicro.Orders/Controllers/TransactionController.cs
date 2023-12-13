@@ -35,13 +35,13 @@ public class TransactionController : ControllerBase
         var filter = new TransactionQueryFilter(request);
 
         var list = new List<Transaction>(await _transactionService.GetAllAsync());
-
+        list.Sort((a, b) => b.CreatedAt.Value.CompareTo(a.CreatedAt.Value));
         list = list.FindAll(o => filter.Validate(o));
         return new GetAllTransactionQueryResult(new List<Transaction>(list));
     }
 
     // GET: api/transaction/orderId
-    [HttpGet("Orders/{orderId}")]
+    [HttpGet("Order/{orderId}")]
     public async Task<ActionResult<GetAllTransactionQueryResult>> GetTransactionsByOrderId(short orderId)
     {
         return new GetAllTransactionQueryResult(
@@ -162,7 +162,7 @@ public class TransactionController : ControllerBase
         vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang : " + transaction.OrderId);
         vnpay.AddRequestData("vnp_OrderType", "other");
 
-        vnpay.AddRequestData("vnp_ReturnUrl", "https://localhost:7140/api/Transaction/VnPayReturn");
+        vnpay.AddRequestData("vnp_ReturnUrl", "https://localhost:7140/api/Transaction/VnPay/VnPayReturn");
         vnpay.AddRequestData("vnp_TxnRef", $"{transaction.Id}");
 
         var paymentUrl = vnpay.CreateRequestUrl("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
@@ -171,7 +171,7 @@ public class TransactionController : ControllerBase
         return new CreateVnPayTransactionCommandResult(paymentUrl, transaction.Id ?? -1);
     }
 
-    [HttpGet("VnPayReturn")]
+    [HttpGet("VnPay/VnPayReturn")]
     public async Task<ActionResult> VnPayReturnMessage()
     {
         var vnpayData = HttpContext.Request.Query;
@@ -200,7 +200,7 @@ public class TransactionController : ControllerBase
                 item.TransactionStatus = TransactionStatus.Success;
                 item.UpdatedAt = DateTimeOffset.UtcNow;
                 await _transactionService.UpdateAsync(item);
-                return new JsonResult("Thanh toán thành công");
+                return Redirect(ClientSideHost.GetReturnUrl(item.OrderId));
             }
 
             item.TransactionStatus = TransactionStatus.Failed;
@@ -219,7 +219,7 @@ public class TransactionController : ControllerBase
         if (transaction == null) return BadRequest("Not Found");
 
         while (transaction.TransactionStatus != TransactionStatus.Success) return BadRequest("Pending");
-        return Ok(transaction);
+        return Ok(transactionId);
     }
 
     // POST: api/Transaction/id

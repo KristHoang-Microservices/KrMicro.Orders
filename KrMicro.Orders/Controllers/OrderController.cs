@@ -48,7 +48,7 @@ public class OrderController : ControllerBase
 
         list = list.FindAll(o => filter.Validate(o));
 
-        return Ok(new GetAllOrderQueryResult(list));
+        return Ok(new GetAllOrderQueryResult(list.OrderByDescending(o => o.CreatedAt).ToList()));
     }
 
     // GET: api/Orders/5
@@ -127,7 +127,7 @@ public class OrderController : ControllerBase
                 newOd.Price = productSize?.data?.price ?? 0;
                 newOd.SizeId = productSize?.data?.sizeId ?? 0;
                 await _orderDetailService.InsertAsync(newOd);
-                item.Total += newOd.Amount + newOd.Price;
+                item.Total += newOd.Amount * newOd.Price;
             }
             else
             {
@@ -186,7 +186,7 @@ public class OrderController : ControllerBase
                     JsonContent.Create(new ProductSizes((productSize?.data?.stock ?? 0) - newDetail.Amount)));
                 if (!productStockUpdate.IsSuccessStatusCode) return BadRequest();
 
-                order.Total += newDetail.Amount + newDetail.Price;
+                order.Total += newDetail.Amount * newDetail.Price;
             }
             else
             {
@@ -196,33 +196,37 @@ public class OrderController : ControllerBase
 
         order = await _orderService.UpdateAsync(order);
         var deliveryDetail = await _deliveryInformationService.GetDetailAsync(x => x.Id == order.DeliveryInformationId);
-        var newTrans = new Transaction
+        if (request.PaymentMethodId != 3)
         {
-            CustomerId = deliveryDetail?.CustomerId,
-            CustomerName = deliveryDetail?.CustomerName,
-            PhoneNumber = deliveryDetail?.Phone ?? "",
-            OrderId = order.Id ?? -1,
-            PaymentMethodId = request.PaymentMethodId,
-            TransactionStatus = TransactionStatus.Pending,
-            CreatedAt = DateTimeOffset.UtcNow,
-            Status = Status.Available,
-            Total = order.Total
-        };
-
-        var promo = await _promoService.GetDetailAsync(p => p.Id == request.PromoId);
-
-        if (promo != null)
-            switch (promo.PromoUnit)
+            var newTrans = new Transaction
             {
-                case PromoUnit.Raw:
-                    newTrans.Total -= promo.Value;
-                    break;
-                case PromoUnit.Percent:
-                    newTrans.Total -= promo.Value * newTrans.Total;
-                    break;
-            }
+                CustomerId = deliveryDetail?.CustomerId,
+                CustomerName = deliveryDetail?.CustomerName,
+                PhoneNumber = deliveryDetail?.Phone ?? "",
+                OrderId = order.Id ?? -1,
+                PaymentMethodId = request.PaymentMethodId,
+                TransactionStatus = TransactionStatus.Pending,
+                CreatedAt = DateTimeOffset.UtcNow,
+                Status = Status.Available,
+                Total = order.Total
+            };
 
-        await _transactionService.InsertAsync(newTrans);
+            var promo = await _promoService.GetDetailAsync(p => p.Id == request.PromoId);
+
+            if (promo != null)
+                switch (promo.PromoUnit)
+                {
+                    case PromoUnit.Raw:
+                        newTrans.Total -= promo.Value;
+                        break;
+                    case PromoUnit.Percent:
+                        newTrans.Total -= promo.Value * newTrans.Total;
+                        break;
+                }
+
+            await _transactionService.InsertAsync(newTrans);
+        }
+
 
         return new CreateOrderCommandResult(order);
     }
